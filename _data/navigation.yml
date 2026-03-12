@@ -1,16 +1,17 @@
 # main links links
 main:
-  - title: "Awards"
-    url: /awards/
+  - title: "RSVP"
+    url: /rsvp/
 
-  - title: "Research"
-    url: /research/
+  - title: "Schedule"
+    url: /schedule/
 
-  - title: "Teaching"
-    url: /teaching/
+  - title: "Hotels & Transportation"
+    url: /hotels&transportation/
 
-  - title: "CV"
-    url: /cv/
 
-  # - title: "Students"
-  #   url: /students/
+  - title: "FAQs"
+    url: /faqs/
+    
+  - title: "Registry (none)"
+    url: /registry/
