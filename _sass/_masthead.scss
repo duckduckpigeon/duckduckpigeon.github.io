@@ -5,6 +5,7 @@
 .masthead {
   // background-image: url("../images/hawaiin.jpg");
   // background-repeat: repeat-x;
+  background: none;
 
   position: relative;
   border-bottom: 1px solid $border-color;
@@ -35,8 +36,7 @@
 }
 
 .masthead__menu {
-  // background-image: url("../images/hawaiin.jpg");
-  // background-repeat: repeat-x;
+  background: none;
 
   ul {
     margin: 0;
@@ -50,6 +50,7 @@
   display: block;
   list-style-type: none;
   white-space: nowrap;
+  background: none;
 
   &--lg {
     padding-right: 2em;
