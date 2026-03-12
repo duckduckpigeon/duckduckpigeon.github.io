@@ -7,6 +7,9 @@ redirect_from:
   - /about/
   - /about.html
 ---
+
+<div style="background-image: url('../images/shirt.jpg'); background-size: cover; padding: 20px;">
+
 Join us for a Labor Day wedding weekend in San Diego!
 
 
@@ -42,7 +45,7 @@ More details coming soon.
 <img src="../images/overview_venue_map.jpg" alt="Map of ocean, home, where venue is" width="300" height="200">
 
 
-
+</div>
 <!-- 
 <center>— <a href="#top">Top</a> —</center>
 
