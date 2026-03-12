@@ -1,0 +1,12 @@
+---
+title: "Exploring Student Experiences in Early Computing Courses during Emergency Remote Teaching"
+collection: publications
+pubtype: paper
+permalink: /publication/2021-06-26-student-experiences-during-remote-teaching
+excerpt: 'Exploring Student Experiences in Early Computing Courses during Emergency Remote Teaching'
+date: 2021-06-26
+venue: "ITiCSE '21: Proceedings of the 26th ACM Conference on Innovation and Technology in Computer Science Education"
+paperurl: 'https://dl.acm.org/doi/10.1145/3430665.3456315'
+citation: 'McKenna Lewis, Zhanchong Deng, <b>Sophia Krause-Levy</b>, Adrian Salguero, William G. Griswold, Leo Porter, and Christine Alvarado. 2021. Exploring Student Experiences in Early Computing Courses during Emergency Remote Teaching. <i>In Proceedings of the 26th ACM Conference on Innovation and Technology in Computer Science Education (ITiCSE)</i>. 88–94. <a href="https://dl.acm.org/doi/10.1145/3430665.3456315" target="_blank">doi/10.1145/3430665.3456315</a>'
+---
+Spring 2020 brought enormous change to student learning, as universities scrambled to put into place support structures to aid students' learning in a remote context. Computer science education was both well-positioned for this change and faced unique challenges, e.g. that students often need significant (in-person) support with programming. In this study we examine how aspects of students' remote learning experience in spring 2020 compared to the same aspects in previous in-person, pre-COVID offerings of 6 lower- to mid-division computer science courses at UC San Diego (UCSD), a large US research university. We were in a unique position to make this comparison because we had been collecting data on several aspects of students' course experiences throughout the 2019-2020 academic year. We found, surprisingly, that most elements of students' experiences that we examined were unchanged, or even improved, in spring 2020. Students in spring reported similar or lower stress levels and found their courses similarly or less challenging relative to previous quarters. However, some aspects did degrade. Students had less connection with their peers (particularly in introductory classes), more interference from family obligations, and higher drop/fail rates in some classes. Surprisingly, these results hold across all assessed demographics. Our results indicate that the actions UCSD and its CS instructors took to mitigate the stresses of remote learning in spring 2020 were largely successful and provide implications for improving education beyond the pandemic.

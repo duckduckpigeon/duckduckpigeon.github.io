@@ -1,0 +1,12 @@
+---
+title: "Experience Report: Designing Massive Open Online Computer Science Courses for Inclusion"
+collection: publications
+pubtype: paper
+permalink: /publication/2021-06-26-mooc-cs-courses-for-inclusion
+excerpt: 'Experience Report: Designing Massive Open Online Computer Science Courses for Inclusion'
+date: 2021-06-26
+venue: "ITiCSE '21: Proceedings of the 26th ACM Conference on Innovation and Technology in Computer Science Education"
+paperurl: 'https://dl.acm.org/doi/10.1145/3430665.3456340'
+citation: '<b>Sophia Krause-Levy</b>, Mia Minnes, Christine Alvarado, and Leo Porter. 2021. Experience Report: Designing Massive Open Online Computer Science Courses for Inclusion. <i>In Proceedings of the 26th ACM Conference on Innovation and Technology in Computer Science Education (ITiCSE)</i>. 95–101. <a href="https://dl.acm.org/doi/10.1145/3430665.3456340" target="_blank">doi/10.1145/3430665.3456340</a>'
+---
+Although Massive Open Online Courses have the potential to reach a much broader audience and offer a lower cost education than traditional in-person classes, they have struggled with low completion rates and low diversity amongst those enrolled and completing the courses. In 2015, we built a series of online courses in computing with the specific goal of attracting and retaining students from groups underrepresented in computing. In our design, we incorporated a number of features aimed at improving the inclusive nature of the courses including: a project-centered course design; an online version of Peer Instruction ConceptTests; videos where students, faculty, and professionals report their struggles when they first learned computing concepts; videos by professional software engineers explaining how computing concepts from the course are used in industry; and videos aimed at providing additional support on the project to students who might be struggling. In this work, we report on the design of the courses and examine how successful our courses were at attracting and retaining women students. We find that compared to other computing courses offered by our institution on the same platform, our courses have: a higher percentage of women enrollment, higher rates of course completion for both men and women, and a slightly smaller gap between completion rates for men and women.

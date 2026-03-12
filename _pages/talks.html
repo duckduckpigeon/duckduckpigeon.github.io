@@ -1,0 +1,29 @@
+---
+layout: archive
+title: "Talks"
+permalink: /talks/
+author_profile: true
+---
+
+<center><a href="#invited-talks">Conference Talks</a> – <a href="#campus-talks">Campus Talks</a></center>
+
+{% include base_path %}
+
+<h2 id="invited-talks">Conference Talks</h2>
+I have given talks at conferences for all of the papers I have published as first author (SIGCSE, ITiCSE, ICER). This includes six publications and corresponding talks.
+<!-- <ol reversed>{% for post in site.talks reversed %}
+  {% if post.talktype == 'invited' %}
+    {% include archive-single-talk.html %}
+  {% endif %}
+{% endfor %}</ol> -->
+
+<center>— <a href="#top">Top</a> —</center>
+
+<h2 id="campus-talks">Campus Talks</h2>
+<ol reversed>{% for post in site.talks reversed %}
+  {% if post.talktype == 'campus' %}
+    {% include archive-single-talk.html %}
+  {% endif %}
+{% endfor %}</ol>
+
+<center>— <a href="#top">Top</a> —</center>
