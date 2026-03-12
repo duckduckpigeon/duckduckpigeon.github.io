@@ -7,13 +7,13 @@
 
 # Site Settings
 locale                   : "en-US"
-title                    : "Sophia Krause-Levy"
+title                    : "Jeffrey Cash & Sophia Krause-Levy (& Pigeon)"
 title_separator          : "-"
-name                     : &name "Sophia Krause-Levy"
+name                     : &name "Jeffrey Cash & Sophia Krause-Levy (& Pigeon)"
 description              : &description "personal description"
-url                      : https://skrauselevy.github.io # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
+url                      : https://duckduckpigeon.github.io # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
 baseurl                  : "" # the subpath of your site, e.g. "/blog"
-repository               : "skrauselevy/skrauselevy.github.io"
+repository               : "duckduckpigeon/duckduckpigeon.github.io"
 teaser                   :  # filename of teaser fallback teaser image placed in /images/, .e.g. "500x300.png"
 breadcrumbs              : false # true, false (default)
 words_per_minute         : 160
@@ -80,15 +80,15 @@ analytics:
 
 # Site Author
 author:
-  name             : "Sophia Krause-Levy"
-  avatar           : "profile.png"
-  bio              : "PhD Candidate"
-  location         : "Computer Science, UCSD"
+  name             : "Jeffrey Cash & Sophia Krause-Levy (& Pigeon)"
+  avatar           : "pigeon.png"
+  bio              : "Bio TODO"
+  location         : "San Diego, CA"
   employer         :
   pubmed           : 
-  googlescholar    : "https://scholar.google.com/citations?user=J3SjlsYAAAAJ"
-  email            :  "mailto:skrausel@eng.ucsd.edu"
-  researchgate     :  "https://www.researchgate.net/profile/Sophia-Krause-Levy"
+  googlescholar    : 
+  email            :  "mailto:sophiakrauselevy@gmail.com"
+  researchgate     :  
   uri              :
   bitbucket        :
   codepen          :
@@ -96,14 +96,14 @@ author:
   flickr           :
   facebook         :
   foursquare       :
-  github           : "skrauselevy"
+  github           : "duckduckpigeon"
   google_plus      :
   keybase          :
   instagram        :
   impactstory      : 
   lastfm           :
   linkedin         :
-  orcid            : "https://orcid.org/yourorcidurl"
+  orcid            : 
   pinterest        :
   soundcloud       :
   stackoverflow    : 
@@ -115,7 +115,7 @@ author:
   xing             :
   youtube          :
   wikipedia        :
-  linkedin         : "skrauselevy"
+  linkedin         : 
 
 
 
