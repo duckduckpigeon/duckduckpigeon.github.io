@@ -180,10 +180,9 @@
    ========================================================================== */
 
 .greedy-nav {
-  opacity: 1;
   position: relative;
   min-width: 250px;
-  background: $background-color;
+  background: none;
 
   a {
     display: block;
