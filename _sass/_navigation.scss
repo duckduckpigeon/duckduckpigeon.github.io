@@ -168,18 +168,21 @@
 }
 
 
-.masthead {
-   background-image: url("../images/hawaiin.jpg");
-    background-size: cover; /* Optional: adjusts the image size to cover the entire space */
-    background-position: center; /* Optional: centers the image */
-    position: relative; /* Needed to position the navbar relative to this container if using absolute positioning */
-    min-height: 100vh; /* Optional: ensures the container takes at least the full viewport height */
-}
+// .masthead {
+//    background-image: url("../images/hawaiin.jpg");
+//     background-size: cover; /* Optional: adjusts the image size to cover the entire space */
+//     background-position: center; /* Optional: centers the image */
+//     position: relative; /* Needed to position the navbar relative to this container if using absolute positioning */
+//     min-height: 100vh; /* Optional: ensures the container takes at least the full viewport height */
+// }
 /*
    Priority plus navigation
    ========================================================================== */
 
 .greedy-nav {
+  background-image: url("../images/hawaiin.jpg");
+  background-repeat: repeat-x;
+
   position: relative;
   min-width: 250px;
   background: $background-color;
