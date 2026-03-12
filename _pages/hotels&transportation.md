@@ -5,7 +5,7 @@ permalink: /hotels&transportation/
 author_profile: true
 ---
 
-### Hotels & Nearby Accomodations
+## Hotels & Nearby Accomodations
 
 Minutes from the venue by pontoon or uber. (Limited Parking.)🌴
 
@@ -32,5 +32,5 @@ If you may be interested in staying at either hotel, please let us know ASAP so 
 
 San Diego also offers many additional hotel and/or Airbnb options.
 
-# Transportation
+## Transportation
 Coming soon!
