@@ -5,8 +5,6 @@ permalink: /faqs/
 author_profile: true
 ---
 
-# FAQs
-
 More to come!
 
 __What is the dress code?__

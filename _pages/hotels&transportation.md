@@ -4,9 +4,8 @@ title: "Hotels & Transportation"
 permalink: /hotels&transportation/
 author_profile: true
 ---
-# Hotels/Accomodations
 
-### NEARBY ACCOMMODATIONS
+### Hotels & Nearby Accomodations
 
 Minutes from the venue by pontoon or uber. (Limited Parking.)🌴
 
