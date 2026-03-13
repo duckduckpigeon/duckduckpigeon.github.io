@@ -88,11 +88,11 @@
       border-radius: 0;
 
       &:hover {
-        color: $link-color-hover;
+        color: black;
       }
 
       &.current {
-        color: #fff;
+        color: black;
         background: $primary-color;
       }
 
@@ -343,7 +343,7 @@
     padding-right: 0.5em;
     color: #fff;
     font-weight: bold;
-    background: $primary-color;
+    background: black;
     border-radius: $border-radius;
 
     &:hover {
@@ -381,7 +381,7 @@
   color: black;
   text-transform: uppercase;
   letter-spacing: 1px;
-  background-color: #fff;
+  background-color: black;
   border: 1px solid $border-color;
   border-radius: $border-radius;
   box-shadow: $box-shadow;
@@ -412,7 +412,7 @@
     border-bottom: 1px solid $border-color;
 
     &:hover {
-      color: #000;
+      color: black;
       background: $lighter-gray;
     }
   }
