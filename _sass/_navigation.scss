@@ -188,11 +188,11 @@
     display: block;
     margin: 0 1rem;
     padding: 0.5rem 0;
-    color: $masthead-link-color;
+    color: black;
     text-decoration: none;
 
     &:hover {
-      color: $masthead-link-color-hover;
+      color: black;
     }
   }
 
@@ -273,7 +273,7 @@
       font-size: $type-size-5;
 
       &:hover {
-        color: $masthead-link-color-hover;
+        color: black;
         background: mix(#fff, $primary-color, 75%);
       }
     }
