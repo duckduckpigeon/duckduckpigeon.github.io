@@ -36,6 +36,7 @@ A beachfront resort with lush tropical grounds, a restaurant and bar, and a full
 
 [__2. The Dana on Mission Bay (\$\$)__
 ](https://thedana.com)
+
 A more budget-friendly option that features a relaxed waterfront setting with pools, a marina, a restaurant/bar, onsite water sport and bike rentals, etc.
 
 *We have a 15% discounted rate (2-night minimum)*
