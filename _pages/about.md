@@ -14,36 +14,38 @@ redirect_from:
 Join us for a Labor Day wedding weekend in San Diego!
 
 
-More details coming soon.
+<img src="../images/Mission Bay Arial.jpg" alt="Map of ocean, home, where venue is" width="500">
 <!-- <a href="#about-overview">Overview of the Weekend</a> – <a href="#about-friday">Friday</a> –  <a href="#about-weddingday">Wedding Day</a>
 <br>
 <br> -->
 <h2 id="about-overview">Overview of the Weekend</h2>
 
-### Friday Evening (Sophia's Birthday)
+### Friday Evening Casual Brewery Gathering (Sophia's Birthday)
 
-- Casual Brewery Gathering 
-
-- Drinks & Light Bites 
-
-- Stone Brewery 
+Please join us Friday evening at Stone Brewing at Liberty Station for a welcome event and to celebrate Sophia's birthday. There will be drinks and light bites! Exact timing is still TBD. Liberty Station has lots of parking so finding parking shouldn't be an issue.
 
 
+Stone Brewing World Bistro & Gardens – Liberty Station<br>
+2816 Historic Decatur Rd UNIT 116<br>
+San Diego, CA 92106
 
-### Saturday
 
-- Wedding Celebration
+### Saturday Wedding Celebration
 
-- Tower Beach Club
+Please join us Saturday for Sophia and Jeff's wedding celebration at Tower Beach Club! There is limited parking. We recommend ubering. If you are staying at either of the hotels we listed you will be picked up.
+
+Tower Beach Club<br>
+1010 Santa Clara Pl<br>
+San Diego, CA 92109
+
 
 
 
 ### Sunday & Monday
 
-- Relax and Enjoy San Diego
+Relax and Enjoy San Diego
 
 
-<img src="../images/Mission Bay Arial.jpg" alt="Map of ocean, home, where venue is" width="500">
 
 
 <!-- 
