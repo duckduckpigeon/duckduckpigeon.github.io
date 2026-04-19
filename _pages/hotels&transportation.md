@@ -9,23 +9,45 @@ author_profile: true
 
 Minutes from the venue by pontoon or uber. (Limited Parking.)🌴
 
-Below are the hotels that we have room blocks at and their corresponding links.
+Below are the hotels that we have room blocks at and their corresponding links. __Discounted wedding rates are available through August 4, 2026, subject to availability__. We recommend booking early, as Labor Day weekend is a popular travel time in San Diego. 
 
-[__Catamaran Resort Hotel & Spa__](https://www.catamaranresort.com)
+[__1. Catamaran Resort Hotel & Spa (\$\$\$)__](https://www.catamaranresort.com)
 
-\$\$\$
+A beachfront resort with lush tropical grounds, a restaurant and bar, and a full-service spa (also discounted) plus pool, hot tub, water activity rentals, bike and surrey rentals, etc. 
 
-[Reserve Your Room at the Catamaran](https://www.catamaranresort.com/groupcode?code=CKLwed)
-
-
+*We have reserved a room block at a discounted rate (3-night minimum).*
 
 
-[__The Dana on Mission Bay__
+
+[Reserve Your Room at the Catamaran here.](https://www.catamaranresort.com/groupcode?code=CKLwed)
+
+(800) 422-8386 
+
+
+
+
+
+
+
+
+[__2. The Dana on Mission Bay (\$\$)__
 ](https://thedana.com)
+A more budget-friendly option that features a relaxed waterfront setting with pools, a marina, a restaurant/bar, onsite water sport and bike rentals, etc.
 
-\$\$
+*We have a 15% discounted rate (2-night minimum)*
 
-[Reserve Your Room at The Dana](https://res.windsurfercrs.com/ibe/details.aspx?propertyid=17116&nights=2&checkin=09/04/2026&group=2609ZJBCE&lang=en-us&adults=2)
+*If at least 10 rooms are reserved for a two-night stay, guests will receive a reduced nightly rate, along with waived resort fees and discounted parking.*
+
+
+
+[Reserve Your Room at The Dana here.](https://res.windsurfercrs.com/ibe/details.aspx?propertyid=17116&nights=2&checkin=09/04/2026&group=2609ZJBCE&lang=en-us&adults=2)
+
+(800) 445-3339
+
+__3. Alternative Options__
+
+San Diego also offers many additional hotel and/or Airbnb options.
+
 
 
 ## Transportation
