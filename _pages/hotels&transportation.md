@@ -9,28 +9,24 @@ author_profile: true
 
 Minutes from the venue by pontoon or uber. (Limited Parking.)🌴
 
-__Catamaran Resort Hotel & Spa__
+Below are the hotels that we have room blocks at and their corresponding links.
+
+[__Catamaran Resort Hotel & Spa__](https://www.catamaranresort.com)
 
 \$\$\$
 
-[https://www.catamaranresort.com](https://www.catamaranresort.com)
+[Reserve Your Room at the Catamaran](https://www.catamaranresort.com/groupcode?code=CKLwed)
 
 
 
-__The Dana on Mission Bay__
+
+[__The Dana on Mission Bay__
+](https://thedana.com)
 
 \$\$
 
-[https://thedana.com
-](https://thedana.com)
+[Reserve Your Room at The Dana](https://res.windsurfercrs.com/ibe/details.aspx?propertyid=17116&nights=2&checkin=09/04/2026&group=2609ZJBCE&lang=en-us&adults=2)
 
-
-__Possible Room Blocks__
-
-If you may be interested in staying at either hotel, please let us know ASAP so we can estimate the number of rooms and arrange a discounted group rate.
-
-
-San Diego also offers many additional hotel and/or Airbnb options.
 
 ## Transportation
-Coming soon!
+There will be limited parking at the venue so we recommend ubering. If you are staying at one of the above hotels we will pick you up by pontoon on the day of the wedding. More details coming soon!
