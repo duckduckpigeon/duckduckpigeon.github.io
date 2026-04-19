@@ -43,7 +43,7 @@ More details coming soon.
 - Relax and Enjoy San Diego
 
 
-<img src="../images/overview_venue_map.jpg" alt="Map of ocean, home, where venue is" width="300" height="200">
+<img src="../images/Mission Bay Arial.jpg" alt="Map of ocean, home, where venue is" width="500">
 
 
 <!-- 

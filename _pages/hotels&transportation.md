@@ -11,6 +11,10 @@ Minutes from the venue by pontoon or uber. (Limited Parking.)🌴
 
 Below are the hotels that we have room blocks at and their corresponding links. __Discounted wedding rates are available through August 4, 2026, subject to availability__. We recommend booking early, as Labor Day weekend is a popular travel time in San Diego. 
 
+
+<img src="../images/Aerial of Area.jpg" alt="Map of ocean, home, where venue is" width="500">
+
+
 [__1. Catamaran Resort Hotel & Spa (\$\$\$)__](https://www.catamaranresort.com)
 
 A beachfront resort with lush tropical grounds, a restaurant and bar, and a full-service spa (also discounted) plus pool, hot tub, water activity rentals, bike and surrey rentals, etc. 
