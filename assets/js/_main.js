@@ -96,3 +96,62 @@ $(document).ready(function(){
   });
 
 });
+
+
+
+const pidge_style = document.createElement('style');
+pidge_style.textContent = `
+  .pop-image {
+    position: fixed;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    animation: popIn 0.6s ease forwards;
+  }
+
+@keyframes popIn {
+    0%   { opacity: 0; transform: translate(-50%, -50%) scale(0.3) rotate(0deg); }
+    60%  { opacity: 1; transform: translate(-50%, -50%) scale(1.5) rotate(var(--rotation)); }
+    100% { opacity: 0; transform: translate(-50%, -50%) scale(1)   rotate(var(--rotation)); }
+  }
+`;
+document.head.appendChild(pidge_style);
+
+const popfunc = (x,y) => {
+  const img = document.createElement('img');
+  img.src = '/images/pidge.png';
+  img.classList.add('pop-image');
+  img.style.left = x + 'px';
+  img.style.top = y + 'px';
+  img.style.width = parseInt(Math.random()*100 + 10) + 'px';
+
+  // Random rotation between -30 and 30 degrees
+  const maxRotation = 360*2;
+  const rotation = Math.random() * maxRotation - maxRotation/2;
+  img.style.setProperty('--rotation', `${rotation}deg`);
+
+
+  document.body.appendChild(img);
+  img.addEventListener('animationend', () => img.remove());
+};
+
+['click', 'touchstart', 'touchend'].forEach(eventType => {
+  document.body.addEventListener(eventType, (e) => {
+    const touch = e.touches?.[0] || e.changedTouches?.[0];
+    const x = touch ? touch.clientX : e.clientX;
+    const y = touch ? touch.clientY : e.clientY;
+    
+    popfunc(x,y);
+    // rest of your code using x and y
+  });
+});
+let lastFired = 0;
+document.body.addEventListener('touchmove', (e) => {
+  const now = Date.now();
+  if (now - lastFired < 100) return; // only fire every 100ms
+  lastFired = now;
+
+  const touch = e.touches[0];
+  popfunc(touch.clientX, touch.clientY);
+  // rest of your code...
+});
+
