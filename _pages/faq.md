@@ -11,7 +11,7 @@ More to come!
 __What is the dress code?__
 - __Friday Evening:__ If you know you know (Hawaiian shirts)
 
-- __Wedding Day:__ The dress code for the wedding is groovy/disco and colorful! Bring the vibes.
+- __Wedding Day:__ Groovy/disco and colorful! Bring the vibes.
 
 We will provide some examples/ideas of what to wear closer to the date.
 
@@ -29,4 +29,4 @@ Due to space constraints, we can only accommodate named guests on the invitation
 
 __Can I bring my children?__
 
-"While we love your little ones, our wedding will be an adults-only celebration. We hope this gives you the chance to enjoy a fun evening out!
+While we love your little ones, our wedding will be an adults-only celebration. We hope this gives you the chance to enjoy a fun evening out!

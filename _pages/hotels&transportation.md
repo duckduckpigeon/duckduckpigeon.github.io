@@ -55,4 +55,4 @@ San Diego also offers many additional hotel and/or Airbnb options.
 
 
 ## Transportation
-There will be limited parking at the venue so we recommend ubering. If you are staying at one of the above hotels we will pick you up by pontoon on the day of the wedding. More details coming soon!
+There will be limited parking at the venue so we recommend ubering. If you are staying at one of the above hotels we will pick you up by pontoon on the day of the wedding.
