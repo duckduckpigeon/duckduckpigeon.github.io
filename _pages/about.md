@@ -22,7 +22,7 @@ Join us for a Labor Day wedding weekend in San Diego!
 
 ### Friday Evening Casual Brewery Gathering (Sophia's Birthday)
 
-Please join us Friday evening at Stone Brewing at Liberty Station for a welcome event and to celebrate Sophia's birthday. There will be drinks and light bites! Exact timing is still TBD. Liberty Station has lots of parking so finding parking shouldn't be an issue.
+Please join us Friday evening at Stone Brewing at Liberty Station for a casual gathering to celebrate Sophia's birthday. There will be drinks and light bites! Exact timing is still TBD. Liberty Station has lots of parking so finding parking shouldn't be an issue.
 
 
 Stone Brewing World Bistro & Gardens – Liberty Station<br>
