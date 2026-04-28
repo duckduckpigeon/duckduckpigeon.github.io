@@ -6,20 +6,29 @@ author_profile: true
 ---
 
 
-We will not be having a registry. Our theme for the wedding is groovy and colorful! Feel free to use any money you would have given us to make yourself a groovy outfit. 
-    Examples/ideas coming soon!
+Having our favorite people together from near and far is the greatest gift we could ask for. We are so appreciative of everyone celebrating with us, and gifts are not expected.
+
+If you’re feeling festive, put that energy toward a groovy and colorful look for the weekend!
+
+More examples/ideas coming soon!
 
 
-__Friday Night Attire (if you know you know)__ 
+## Friday Night Attire (If You Know, You Know)
+
+Think: Hawaiian shirts, bold prints, and fun, colorful vibes.
+
+
 
 Hawaiian shirts. Wedding party will be wearing this:
 
 
 <img src="../images/hawaiian_shirt.jpg" alt="bridesmaid in hawaiian shirt" width="200">
 
-__Saturday Wedding Attire__ 
+## Saturday Wedding Attire
 
-Groovy and colorful! This is what the bridesmaids will be wearing:
+Groovy and colorful! The wedding party will be leaning into the theme. See below bridesmaids’ dresses for inspiration.
+
+Groomsmen inspiration coming soon! Think colorful suits and shirts. The more color the better!
 
 <img src="../images/bridesmaid_dress.jpg" alt="colorful bridesmaid dress that has bright pink and purple from hello molly" width="200">
 

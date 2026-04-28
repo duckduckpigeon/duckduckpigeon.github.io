@@ -5,4 +5,6 @@ permalink: /rsvp/
 author_profile: true
 ---
 
-[Coming soon! Please fill out our save the date form for now by clicking here.](https://forms.gle/YSZJazcxLRn3pSTg6)
+RSVP details coming soon! In the meantime, please <u>[click here](https://forms.gle/YSZJazcxLRn3pSTg6)</u> to complete our Save the Date form.
+
+
