@@ -7,7 +7,7 @@ author_profile: true
 
 ## Hotels & Nearby Accomodations
 
-🌴 Minutes from the venue by pontoon or uber(Venue Parking is Limited)
+🌴 Minutes from the venue by pontoon or uber (Venue Parking is Limited)
 
 Below are the hotels that we have room blocks at and their corresponding links. __Discounted wedding rates are available through August 4, 2026, subject to availability__. We recommend booking early, as Labor Day weekend is a popular travel time in San Diego. 
 

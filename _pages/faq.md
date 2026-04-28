@@ -8,12 +8,10 @@ author_profile: true
 <details open>
   <summary><b>What is the dress code?</b></summary>
   <ul>
-  <li><b>Friday Evening: </b>If you know you know (Hawaiian shirts)
-</li>
+  <li><b>Friday Evening: </b>If you know you know (Hawaiian shirts)</li>
   <li><b>Wedding Day:</b> Groovy/disco and colorful! Bring the vibes.</li>
 </ul>
-
-We will provide some examples/ideas of what to wear closer to the date.
+ Please see registry page for ideas on what to wear.
 
 </details>
 <br>
