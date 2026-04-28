@@ -5,7 +5,7 @@ permalink: /schedule/
 author_profile: true
 ---
 
-## Friday (7:00 - 10:00 PM)
+## Friday, September 4th (7:00 - 10:00 PM)
 
 __Location__<br>
 <a id='stone-address' href='https://www.stonebrewing.com/visit/bistros/liberty-station'>
@@ -14,7 +14,7 @@ Stone Brewing World Bistro & Gardens – Liberty Station<br>
 San Diego, CA 92106
 </a>
 
-## Saturday (4:30 - 11:30 PM)
+## Saturday, September 5th (4:30 - 11:30 PM)
 - 4:30 PM Guest arrival
 - 5:00 PM Ceremony 
 - Reception to follow
