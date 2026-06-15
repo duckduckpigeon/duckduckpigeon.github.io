@@ -33,6 +33,14 @@ author_profile: true
   </div>
 </div>
 
+<script>
+  document.getElementById("name-search").addEventListener("keydown", () => {
+    const x = Math.random() * window.innerWidth;
+    const y = Math.random() * window.innerHeight;
+    popfunc(x, y);
+  });
+</script>
+
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
   import { getFirestore, collection, getDocs, doc, updateDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
