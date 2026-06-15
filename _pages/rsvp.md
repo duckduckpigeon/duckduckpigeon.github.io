@@ -51,7 +51,7 @@ author_profile: true
 
   let currentGroupDoc = null;
 
-  document.getElementById("search-btn").addEventListener("click", async () => {
+  async function doSearch() {
     const query = document.getElementById("name-search").value.trim().toLowerCase();
     const errorEl = document.getElementById("search-error");
     errorEl.style.display = "none";
@@ -107,6 +107,11 @@ author_profile: true
 
     document.getElementById("search-section").style.display = "none";
     document.getElementById("rsvp-section").style.display = "block";
+  }
+
+  document.getElementById("search-btn").addEventListener("click", doSearch);
+  document.getElementById("name-search").addEventListener("keydown", (e) => {
+    if (e.key === "Enter") doSearch();
   });
 
   document.getElementById("rsvp-form").addEventListener("submit", async (e) => {
