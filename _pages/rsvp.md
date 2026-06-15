@@ -43,6 +43,15 @@ author_profile: true
     margin-top: 0.25em;
     display: none;
   }
+  @keyframes rsvp-shake {
+    0%   { transform: translateX(0); }
+    20%  { transform: translateX(-6px); }
+    40%  { transform: translateX(6px); }
+    60%  { transform: translateX(-4px); }
+    80%  { transform: translateX(4px); }
+    100% { transform: translateX(0); }
+  }
+  .rsvp-error.shake { animation: rsvp-shake 0.35s ease; }
   .guest-card {
     border: 1px solid #e0e0e0;
     border-radius: 6px;
@@ -97,6 +106,9 @@ author_profile: true
 
   <div id="rsvp-section" style="display:none;">
     <h3 id="group-greeting"></h3>
+    <div id="already-submitted" style="display:none; background:#fff8e1; border:1px solid #ffe082; border-radius:6px; padding:0.6em 1em; margin-bottom:1em; font-size:0.95em;">
+      You've already RSVPed — your responses are shown below. Feel free to make changes and resubmit.
+    </div>
     <p>Please indicate who will be attending:</p>
     <form id="rsvp-form">
       <div id="guest-list"></div>
@@ -151,9 +163,12 @@ author_profile: true
     const queryLastName = queryWords[queryWords.length - 1];
     const queryFirstPart = queryWords.slice(0, -1).join(" ");
 
-    if (queryWords.length < 2 || queryFirstPart.length < 3) {
+    if (queryWords.length < 2 || queryFirstPart.length < 2) {
       errorEl.textContent = "Please enter your first and last name (e.g. \"Jeff Cash\").";
       errorEl.style.display = "block";
+      errorEl.classList.remove("shake");
+      void errorEl.offsetWidth;
+      errorEl.classList.add("shake");
       return;
     }
 
@@ -164,13 +179,18 @@ author_profile: true
         const guestWords = guest.split(" ");
         const guestLastName = guestWords[guestWords.length - 1];
         const guestFirstName = guestWords.slice(0, -1).join(" ");
-        return guestLastName === queryLastName && guestFirstName.startsWith(queryFirstPart);
+        const prefixLen = Math.min(queryFirstPart.length, 3);
+        return guestLastName === queryLastName &&
+               guestFirstName.slice(0, prefixLen) === queryFirstPart.slice(0, prefixLen);
       });
     });
 
     if (!match) {
       errorEl.textContent = "No group found. Try a different name or contact us directly.";
       errorEl.style.display = "block";
+      errorEl.classList.remove("shake");
+      void errorEl.offsetWidth;
+      errorEl.classList.add("shake");
       return;
     }
 
@@ -178,6 +198,7 @@ author_profile: true
     const data = match.data();
 
     document.getElementById("group-greeting").textContent = `We found your invitation: ${data.name}`;
+    document.getElementById("already-submitted").style.display = data.submitted ? "block" : "none";
 
     const guestList = document.getElementById("guest-list");
     guestList.innerHTML = "";
@@ -222,6 +243,9 @@ author_profile: true
     if (!allAnswered) {
       errorEl.textContent = "Please select attending or not attending for each person.";
       errorEl.style.display = "block";
+      errorEl.classList.remove("shake");
+      void errorEl.offsetWidth;
+      errorEl.classList.add("shake");
       return;
     }
 
@@ -234,8 +258,9 @@ author_profile: true
     const attending = data.guests.filter(g => rsvp[g]);
     const notAttending = data.guests.filter(g => !rsvp[g]);
     let msg = "";
-    if (attending.length) msg += `${attending.join(" and ")} will be attending. `;
-    if (notAttending.length) msg += `${notAttending.join(" and ")} will not be attending.`;
+    const joinNames = names => names.length < 2 ? names[0] : `${names.slice(0, -1).join(", ")} and ${names[names.length - 1]}`;
+    if (attending.length) msg += `${joinNames(attending)} will be attending. `;
+    if (notAttending.length) msg += `${joinNames(notAttending)} will not be attending.`;
 
     document.getElementById("confirmation-message").textContent = msg;
     document.getElementById("rsvp-section").style.display = "none";
