@@ -18,19 +18,23 @@ author_profile: true
   }
   #name-search {
     flex: 1;
-    padding: 0.5em 0.75em;
-    font-size: 1em;
+    height: 40px;
+    padding: 0 0.75em;
+    font-size: 16px;
     border: 1px solid #c8c8c8;
     border-radius: 4px;
+    box-sizing: border-box;
   }
   .rsvp-btn {
-    padding: 0.5em 1.25em;
-    font-size: 1em;
+    height: 40px;
+    padding: 0 1.25em;
+    font-size: 16px;
     background: #418aa0;
     color: #fff;
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    box-sizing: border-box;
   }
   .rsvp-btn:hover { background: #316878; }
   .rsvp-error {
