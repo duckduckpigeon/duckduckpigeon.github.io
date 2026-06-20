@@ -57,6 +57,8 @@ author_profile: true
     border-radius: 6px;
     padding: 1em 1.25em;
     margin-bottom: 0.75em;
+  }
+  .guest-main-row {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -80,6 +82,33 @@ author_profile: true
   }
   .guest-radio-group input[type="radio"] {
     margin: 0;
+  }
+  .plus-one-row {
+    margin-top: 0.75em;
+    padding-top: 0.75em;
+    border-top: 1px solid #eee;
+    display: flex;
+    align-items: center;
+    gap: 0.75em;
+    flex-wrap: wrap;
+  }
+  .plus-one-row label {
+    display: flex;
+    align-items: center;
+    gap: 0.35em;
+    cursor: pointer;
+    font-size: 0.9em;
+    margin: 0;
+  }
+  .plus-one-name {
+    flex: 1;
+    min-width: 160px;
+    height: 34px;
+    padding: 0 0.6em;
+    font-size: 14px;
+    border: 1px solid #c8c8c8;
+    border-radius: 4px;
+    box-sizing: border-box;
   }
   #submit-btn {
     margin-top: 0.5em;
@@ -136,7 +165,7 @@ author_profile: true
 
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
-  import { getFirestore, collection, getDocs, doc, updateDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
+  import { getFirestore, collection, getDocs, doc, updateDoc, serverTimestamp, arrayUnion } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
 
   const firebaseConfig = {
     apiKey: "AIzaSyDCJHXp8o6-sNXZnBwtIL5YQkwziqIJ5B8",
@@ -175,7 +204,8 @@ author_profile: true
     const snapshot = await getDocs(collection(db, "groups"));
     const match = snapshot.docs.find(d => {
       const guests = (d.data().guests || []).map(g => g.toLowerCase());
-      return guests.some(guest => {
+      const nicknames = (d.data().nicknames || []).map(n => n.toLowerCase());
+      return guests.concat(nicknames).some(guest => {
         const guestWords = guest.split(" ");
         const guestLastName = guestWords[guestWords.length - 1];
         const guestFirstName = guestWords.slice(0, -1).join(" ");
@@ -204,16 +234,49 @@ author_profile: true
     guestList.innerHTML = "";
     (data.guests || []).forEach(guest => {
       const existing = data.rsvp ? data.rsvp[guest] : undefined;
+      const isPlusOneEligible = (data.plusOnes || []).includes(guest);
+      const existingPlusOneName = (data.plusOneNames && data.plusOneNames[guest]) || "";
+
       const div = document.createElement("div");
       div.className = "guest-card";
       div.innerHTML = `
-        <strong>${guest}</strong>
-        <div class="guest-radio-group">
-          <label><input type="radio" name="${guest}" value="yes" ${existing === true ? "checked" : ""}/> Attending</label>
-          <label><input type="radio" name="${guest}" value="no" ${existing === false ? "checked" : ""}/> Not attending</label>
+        <div class="guest-main-row">
+          <strong>${guest}</strong>
+          <div class="guest-radio-group">
+            <label><input type="radio" name="${guest}" value="yes" ${existing === true ? "checked" : ""}/> Attending</label>
+            <label><input type="radio" name="${guest}" value="no" ${existing === false ? "checked" : ""}/> Not attending</label>
+          </div>
         </div>
+        ${isPlusOneEligible ? `
+        <div class="plus-one-row" data-guest="${guest}" style="display:${existing === true ? "flex" : "none"};">
+          <label><input type="checkbox" class="plus-one-checkbox" ${existingPlusOneName ? "checked" : ""}/> Bringing a guest</label>
+          <input type="text" class="plus-one-name" placeholder="Guest's name" value="${existingPlusOneName}" style="display:${existingPlusOneName ? "inline-block" : "none"};" />
+        </div>` : ""}
       `;
       guestList.appendChild(div);
+
+      if (isPlusOneEligible) {
+        const plusOneRow = div.querySelector(".plus-one-row");
+        const checkbox = div.querySelector(".plus-one-checkbox");
+        const nameInput = div.querySelector(".plus-one-name");
+
+        div.querySelectorAll(`input[name="${guest}"]`).forEach(radio => {
+          radio.addEventListener("change", () => {
+            plusOneRow.style.display = radio.value === "yes" && radio.checked ? "flex" : plusOneRow.style.display;
+            if (radio.value === "no" && radio.checked) {
+              plusOneRow.style.display = "none";
+              checkbox.checked = false;
+              nameInput.style.display = "none";
+              nameInput.value = "";
+            }
+          });
+        });
+
+        checkbox.addEventListener("change", () => {
+          nameInput.style.display = checkbox.checked ? "inline-block" : "none";
+          if (!checkbox.checked) nameInput.value = "";
+        });
+      }
     });
 
     document.getElementById("search-section").style.display = "none";
@@ -232,12 +295,21 @@ author_profile: true
 
     const data = currentGroupDoc.data();
     const rsvp = {};
+    const plusOneNames = {};
     let allAnswered = true;
 
     for (const guest of data.guests) {
       const selected = document.querySelector(`input[name="${guest}"]:checked`);
       if (!selected) { allAnswered = false; break; }
       rsvp[guest] = selected.value === "yes";
+
+      if (rsvp[guest] && (data.plusOnes || []).includes(guest)) {
+        const checkbox = document.querySelector(`.plus-one-row[data-guest="${guest}"] .plus-one-checkbox`);
+        const nameInput = document.querySelector(`.plus-one-row[data-guest="${guest}"] .plus-one-name`);
+        if (checkbox && checkbox.checked && nameInput.value.trim()) {
+          plusOneNames[guest] = nameInput.value.trim();
+        }
+      }
     }
 
     if (!allAnswered) {
@@ -251,8 +323,10 @@ author_profile: true
 
     await updateDoc(doc(db, "groups", currentGroupDoc.id), {
       rsvp,
+      plusOneNames,
       submitted: true,
-      submittedAt: serverTimestamp()
+      submittedAt: serverTimestamp(),
+      history: arrayUnion({ rsvp, plusOneNames, submittedAt: new Date() })
     });
 
     const attending = data.guests.filter(g => rsvp[g]);
@@ -260,7 +334,10 @@ author_profile: true
     let msg = "";
     const joinNames = names => names.length < 2 ? names[0] : `${names.slice(0, -1).join(", ")} and ${names[names.length - 1]}`;
     if (attending.length) msg += `${joinNames(attending)} will be attending. `;
-    if (notAttending.length) msg += `${joinNames(notAttending)} will not be attending.`;
+    if (notAttending.length) msg += `${joinNames(notAttending)} will not be attending. `;
+    for (const [guest, plusOneName] of Object.entries(plusOneNames)) {
+      msg += `${guest} is bringing ${plusOneName}. `;
+    }
 
     document.getElementById("confirmation-message").textContent = msg;
     document.getElementById("rsvp-section").style.display = "none";
