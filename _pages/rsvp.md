@@ -353,9 +353,14 @@ author_profile: true
     }, 150);
 
     setTimeout(() => {
-      spawnImagesWithin(nameSearchRect, 32, 4);
-      spawnImagesWithin(searchBtnRect, 32, 4);
+      spawnImagesWithin(nameSearchRect, 32, 4.5);
+      spawnImagesWithin(searchBtnRect, 32, 4.5);
     }, 250);
+
+    setTimeout(() => {
+      spawnImagesWithin(nameSearchRect, 32, 10);
+      spawnImagesWithin(searchBtnRect, 32, 10);
+    }, 325);
 
     document.getElementById("group-greeting").textContent = `We found your invitation: ${data.name}`;
     document.getElementById("already-submitted").style.display = data.submitted ? "block" : "none";
