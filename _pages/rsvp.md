@@ -225,9 +225,9 @@ author_profile: true
         const nameInput = div.querySelector(".plus-one-name");
 
         function resetNameInput() {
-          // Only clear the "edited" flag if the field was already empty —
-          // a name that was typed (or saved from before) stays protected
-          // from being silently overwritten if the box gets rechecked.
+          /* Only clear the "edited" flag if the field was already empty — a name
+             that was typed (or saved from before) stays protected from being
+             silently overwritten if the box gets rechecked. */
           if (!nameInput.value) {
             nameInput.dataset.edited = "false";
           }
@@ -277,8 +277,8 @@ author_profile: true
       sync(dinnerInput, weddingInput);
     });
 
-    // A freshly (re)checked box has nothing typed into it yet to trigger the
-    // mirroring above, so pull in the other field's value on check too.
+    /* A freshly (re)checked box has nothing typed into it yet to trigger the
+       mirroring above, so pull in the other field's value on check too. */
     weddingCheckbox.addEventListener("change", () => {
       if (weddingCheckbox.checked) sync(dinnerInput, weddingInput);
     });
