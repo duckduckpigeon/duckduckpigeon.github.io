@@ -105,7 +105,7 @@ author_profile: true
     min-width: 160px;
     height: 34px;
     padding: 0 0.6em;
-    font-size: 14px;
+    font-size: 16px;
     border: 1px solid #c8c8c8;
     border-radius: 4px;
     box-sizing: border-box;
