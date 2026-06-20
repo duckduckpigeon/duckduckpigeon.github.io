@@ -333,6 +333,30 @@ author_profile: true
     currentGroupDoc = match;
     const data = match.data();
 
+    function spawnImagesWithin(rect, count, verticalExpand = 0) {
+      const top = rect.top - rect.height * verticalExpand;
+      const height = rect.height * (1 + 2 * verticalExpand);
+      for (let i = 0; i < count; i++) {
+        spawnImage(rect.left + Math.random() * rect.width, top + Math.random() * height);
+      }
+    }
+
+    const nameSearchRect = document.getElementById("name-search").getBoundingClientRect();
+    const searchBtnRect = document.getElementById("search-btn").getBoundingClientRect();
+
+    spawnImagesWithin(nameSearchRect, 32);
+    spawnImagesWithin(searchBtnRect, 32);
+
+    setTimeout(() => {
+      spawnImagesWithin(nameSearchRect, 32, 1.5);
+      spawnImagesWithin(searchBtnRect, 32, 1.5);
+    }, 150);
+
+    setTimeout(() => {
+      spawnImagesWithin(nameSearchRect, 32, 4);
+      spawnImagesWithin(searchBtnRect, 32, 4);
+    }, 250);
+
     document.getElementById("group-greeting").textContent = `We found your invitation: ${data.name}`;
     document.getElementById("already-submitted").style.display = data.submitted ? "block" : "none";
 
