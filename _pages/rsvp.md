@@ -161,7 +161,7 @@ author_profile: true
   <div id="confirmation-section" style="display:none;">
     <div class="confirmation-box">
       <h3 style="margin-top:0;">Thanks for your RSVP!</h3>
-      <p id="confirmation-message"></p>
+      <div id="confirmation-message"></div>
       <p style="margin-bottom:0;">Can't wait to celebrate with you. See you September 5th!</p>
     </div>
   </div>
@@ -431,28 +431,59 @@ author_profile: true
     }
 
     const joinNames = names => names.length < 2 ? names[0] : `${names.slice(0, -1).join(", ")} and ${names[names.length - 1]}`;
-    let msg = "";
 
+    let dinnerMsg = "";
     if (hasDinner) {
       const dinnerAttending = data.guests.filter(g => dinnerRsvp[g]);
       const dinnerNotAttending = data.guests.filter(g => !dinnerRsvp[g]);
-      if (dinnerAttending.length) msg += `For the welcome dinner: ${joinNames(dinnerAttending)} will be attending. `;
-      if (dinnerNotAttending.length) msg += `${joinNames(dinnerNotAttending)} will not be attending the dinner. `;
+      if (dinnerAttending.length) dinnerMsg += `For the welcome dinner: ${joinNames(dinnerAttending)} will be attending. `;
+      if (dinnerNotAttending.length) dinnerMsg += `${joinNames(dinnerNotAttending)} will not be attending the dinner. `;
       for (const [guest, plusOneName] of Object.entries(dinnerPlusOneNames)) {
-        msg += `${guest} is bringing ${plusOneName} to the dinner. `;
+        dinnerMsg += `${guest} is bringing ${plusOneName} to the dinner. `;
       }
     }
 
+    let weddingMsg = "";
     const attending = data.guests.filter(g => rsvp[g]);
     const notAttending = data.guests.filter(g => !rsvp[g]);
-    if (attending.length) msg += `For the wedding: ${joinNames(attending)} will be attending. `;
-    if (notAttending.length) msg += `${joinNames(notAttending)} will not be attending. `;
+    if (attending.length) weddingMsg += `For the wedding: ${joinNames(attending)} will be attending. `;
+    if (notAttending.length) weddingMsg += `${joinNames(notAttending)} will not be attending. `;
     for (const [guest, plusOneName] of Object.entries(plusOneNames)) {
-      msg += `${guest} is bringing ${plusOneName} to the wedding. `;
+      weddingMsg += `${guest} is bringing ${plusOneName} to the wedding. `;
     }
 
-    document.getElementById("confirmation-message").textContent = msg;
+    const messageEl = document.getElementById("confirmation-message");
+    messageEl.innerHTML = "";
+    [dinnerMsg, weddingMsg].forEach(text => {
+      if (!text) return;
+      const p = document.createElement("p");
+      p.textContent = text.trim();
+      messageEl.appendChild(p);
+    });
     document.getElementById("rsvp-section").style.display = "none";
     document.getElementById("confirmation-section").style.display = "block";
+
+    for (let i = 0; i < 32; i++) {
+      spawnImage(Math.random() * window.innerWidth, Math.random() * window.innerHeight);
+      popfunc(Math.random() * window.innerWidth, Math.random() * window.innerHeight);
+    }
+
+    setTimeout(() => {
+      for (let i = 0; i < 64; i++) {
+        spawnImage(Math.random() * window.innerWidth, Math.random() * window.innerHeight);
+      }
+    }, 250);
+
+    setTimeout(() => {
+      for (let i = 0; i < 64; i++) {
+        spawnImage(Math.random() * window.innerWidth, Math.random() * window.innerHeight);
+      }
+    }, 400);
+
+    setTimeout(() => {
+      for (let i = 0; i < 32; i++) {
+        spawnImage(Math.random() * window.innerWidth, Math.random() * window.innerHeight);
+      }
+    }, 500);
   });
 </script>
