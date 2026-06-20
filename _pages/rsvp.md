@@ -104,6 +104,7 @@ author_profile: true
     flex: 1;
     min-width: 160px;
     height: 34px;
+    margin-top: 7px;
     padding: 0 0.6em;
     font-size: 16px;
     border: 1px solid #c8c8c8;
