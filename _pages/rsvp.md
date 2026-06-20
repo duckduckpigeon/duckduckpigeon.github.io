@@ -65,6 +65,12 @@ author_profile: true
     flex-wrap: wrap;
     gap: 0.75em;
   }
+  @media (max-width: 480px) {
+    .guest-main-row {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
   .guest-card strong {
     font-size: 1.05em;
   }
