@@ -155,10 +155,12 @@ author_profile: true
     <p>Please indicate who will be attending:</p>
     <form id="rsvp-form">
       <div id="dinner-section" style="display:none;">
-        <h4 class="event-heading">Welcome Dinner (Friday)</h4>
+        <h4 class="event-heading">Welcome Dinner (Friday, 5:30–7:00pm)</h4>
         <div id="dinner-guest-list"></div>
       </div>
-      <h4 id="wedding-heading" class="event-heading" style="display:none;">Wedding Celebration (Saturday)</h4>
+      <h4 class="event-heading">Cocktail Hour (Friday, 7:00pm)</h4>
+      <div id="cocktail-guest-list"></div>
+      <h4 class="event-heading">Wedding Celebration (Saturday)</h4>
       <div id="guest-list"></div>
       <button type="submit" id="submit-btn" class="rsvp-btn">Submit RSVP</button>
     </form>
@@ -274,36 +276,46 @@ author_profile: true
     });
   }
 
-  function linkPlusOneInputs(guest) {
-    const weddingRow = document.querySelector(`#guest-list .plus-one-row[data-guest="${guest}"]`);
-    const dinnerRow = document.querySelector(`#dinner-guest-list .plus-one-row[data-guest="${guest}"]`);
-    if (!weddingRow || !dinnerRow) return;
+  function getActiveSectionContainerIds(hasDinner) {
+    const ids = [];
+    if (hasDinner) ids.push("dinner-guest-list");
+    ids.push("cocktail-guest-list");
+    ids.push("guest-list");
+    return ids;
+  }
 
-    const weddingInput = weddingRow.querySelector(".plus-one-name");
-    const dinnerInput = dinnerRow.querySelector(".plus-one-name");
-    const weddingCheckbox = weddingRow.querySelector(".plus-one-checkbox");
-    const dinnerCheckbox = dinnerRow.querySelector(".plus-one-checkbox");
+  function linkPlusOneInputs(guest, sectionContainerIds) {
+    const rows = sectionContainerIds
+      .map(id => document.querySelector(`#${id} .plus-one-row[data-guest="${guest}"]`))
+      .filter(row => row !== null);
+    if (rows.length < 2) return;
+
+    const fields = rows.map(row => ({
+      input: row.querySelector(".plus-one-name"),
+      checkbox: row.querySelector(".plus-one-checkbox")
+    }));
 
     function sync(source, target) {
       if (target.dataset.edited !== "true") target.value = source.value;
     }
 
-    weddingInput.addEventListener("input", () => {
-      weddingInput.dataset.edited = "true";
-      sync(weddingInput, dinnerInput);
-    });
-    dinnerInput.addEventListener("input", () => {
-      dinnerInput.dataset.edited = "true";
-      sync(dinnerInput, weddingInput);
+    fields.forEach(({ input }) => {
+      input.addEventListener("input", () => {
+        input.dataset.edited = "true";
+        fields.forEach(other => {
+          if (other.input !== input) sync(input, other.input);
+        });
+      });
     });
 
     /* A freshly (re)checked box has nothing typed into it yet to trigger the
-       mirroring above, so pull in the other field's value on check too. */
-    weddingCheckbox.addEventListener("change", () => {
-      if (weddingCheckbox.checked) sync(dinnerInput, weddingInput);
-    });
-    dinnerCheckbox.addEventListener("change", () => {
-      if (dinnerCheckbox.checked) sync(weddingInput, dinnerInput);
+       mirroring above, so pull in the first other section's value on check too. */
+    fields.forEach(({ input, checkbox }) => {
+      checkbox.addEventListener("change", () => {
+        if (!checkbox.checked) return;
+        const sourceWithValue = fields.find(other => other.input !== input && other.input.value);
+        if (sourceWithValue) sync(sourceWithValue.input, input);
+      });
     });
   }
 
@@ -383,16 +395,15 @@ author_profile: true
 
     const hasDinner = !!data.welcomeDinner;
     document.getElementById("dinner-section").style.display = hasDinner ? "block" : "none";
-    document.getElementById("wedding-heading").style.display = hasDinner ? "block" : "none";
 
     if (hasDinner) {
       renderGuestSection(document.getElementById("dinner-guest-list"), data.guests || [], "dinner", data.dinnerRsvp, data.plusOnes, data.dinnerPlusOneNames);
     }
+    renderGuestSection(document.getElementById("cocktail-guest-list"), data.guests || [], "cocktail", data.cocktailRsvp, data.plusOnes, data.cocktailPlusOneNames);
     renderGuestSection(document.getElementById("guest-list"), data.guests || [], "wedding", data.rsvp, data.plusOnes, data.plusOneNames);
 
-    if (hasDinner) {
-      (data.plusOnes || []).forEach(linkPlusOneInputs);
-    }
+    const sectionContainerIds = getActiveSectionContainerIds(hasDinner);
+    (data.plusOnes || []).forEach(guest => linkPlusOneInputs(guest, sectionContainerIds));
 
     document.getElementById("search-section").style.display = "none";
     document.getElementById("rsvp-section").style.display = "block";
@@ -431,11 +442,12 @@ author_profile: true
     }
 
     const weddingResult = collectResponses(document.getElementById("guest-list"), "wedding", data.plusOnes);
+    const cocktailResult = collectResponses(document.getElementById("cocktail-guest-list"), "cocktail", data.plusOnes);
     const dinnerResult = hasDinner
       ? collectResponses(document.getElementById("dinner-guest-list"), "dinner", data.plusOnes)
       : { rsvp: {}, plusOneNames: {} };
 
-    if (!weddingResult || !dinnerResult) {
+    if (!weddingResult || !cocktailResult || !dinnerResult) {
       errorEl.textContent = "Please select attending or not attending for each person.";
       errorEl.style.display = "block";
       errorEl.classList.remove("shake");
@@ -445,16 +457,19 @@ author_profile: true
     }
 
     const { rsvp, plusOneNames } = weddingResult;
+    const { rsvp: cocktailRsvp, plusOneNames: cocktailPlusOneNames } = cocktailResult;
     const dinnerRsvp = dinnerResult.rsvp;
     const dinnerPlusOneNames = dinnerResult.plusOneNames;
 
     const updatePayload = {
       rsvp,
       plusOneNames,
+      cocktailRsvp,
+      cocktailPlusOneNames,
       submitted: true,
       submittedAt: serverTimestamp()
     };
-    const historyEntry = { rsvp, plusOneNames, submittedAt: new Date() };
+    const historyEntry = { rsvp, plusOneNames, cocktailRsvp, cocktailPlusOneNames, submittedAt: new Date() };
     if (hasDinner) {
       updatePayload.dinnerRsvp = dinnerRsvp;
       updatePayload.dinnerPlusOneNames = dinnerPlusOneNames;
@@ -489,6 +504,15 @@ author_profile: true
       }
     }
 
+    let cocktailMsg = "";
+    const cocktailAttending = data.guests.filter(g => cocktailRsvp[g]);
+    const cocktailNotAttending = data.guests.filter(g => !cocktailRsvp[g]);
+    if (cocktailAttending.length) cocktailMsg += `For the cocktail hour: ${joinNames(cocktailAttending)} will be attending. `;
+    if (cocktailNotAttending.length) cocktailMsg += `${joinNames(cocktailNotAttending)} will not be attending the cocktail hour. `;
+    for (const [guest, plusOneName] of Object.entries(cocktailPlusOneNames)) {
+      cocktailMsg += `${guest} is bringing ${plusOneName} to the cocktail hour. `;
+    }
+
     let weddingMsg = "";
     const attending = data.guests.filter(g => rsvp[g]);
     const notAttending = data.guests.filter(g => !rsvp[g]);
@@ -500,7 +524,7 @@ author_profile: true
 
     const messageEl = document.getElementById("confirmation-message");
     messageEl.innerHTML = "";
-    [dinnerMsg, weddingMsg].forEach(text => {
+    [dinnerMsg, cocktailMsg, weddingMsg].forEach(text => {
       if (!text) return;
       const p = document.createElement("p");
       p.textContent = text.trim();
@@ -508,11 +532,11 @@ author_profile: true
     });
 
     const attendingWedding = attending.length > 0;
-    const attendingDinner = dinnerAttending.length > 0;
+    const attendingFriday = dinnerAttending.length > 0 || cocktailAttending.length > 0;
     let closingText;
-    if (attendingDinner && attendingWedding) {
+    if (attendingFriday && attendingWedding) {
       closingText = "Can't wait to celebrate with you! See you September 4th and 5th!";
-    } else if (attendingDinner) {
+    } else if (attendingFriday) {
       closingText = "Can't wait to celebrate with you! See you September 4th!";
     } else if (attendingWedding) {
       closingText = "Can't wait to celebrate with you! See you September 5th!";
