@@ -150,7 +150,7 @@ author_profile: true
   <div id="rsvp-section" style="display:none;">
     <h3 id="group-greeting"></h3>
     <div id="already-submitted" style="display:none; background:#fff8e1; border:1px solid #ffe082; border-radius:6px; padding:0.6em 1em; margin-bottom:1em; font-size:0.95em;">
-      You've already RSVPed — your responses are shown below. Feel free to make changes and resubmit.
+      Someone in your group has already submitted this RSVP — responses are shown below. Feel free to make changes and resubmit.
     </div>
     <p>Please indicate who will be attending:</p>
     <form id="rsvp-form">
@@ -214,6 +214,7 @@ author_profile: true
   }
 
   let currentGroupDoc = null;
+  let isSubmitting = false;
 
   function renderGuestSection(containerEl, guests, namePrefix, existingRsvp, plusOnes, existingPlusOneNames) {
     containerEl.innerHTML = "";
@@ -405,6 +406,9 @@ author_profile: true
     const sectionContainerIds = getActiveSectionContainerIds(hasDinner);
     (data.plusOnes || []).forEach(guest => linkPlusOneInputs(guest, sectionContainerIds));
 
+    isSubmitting = false;
+    document.getElementById("submit-btn").disabled = false;
+
     document.getElementById("search-section").style.display = "none";
     document.getElementById("rsvp-section").style.display = "block";
   }
@@ -416,6 +420,11 @@ author_profile: true
 
   document.getElementById("rsvp-form").addEventListener("submit", async (e) => {
     e.preventDefault();
+    if (isSubmitting) return;
+    isSubmitting = true;
+    const submitBtn = document.getElementById("submit-btn");
+    submitBtn.disabled = true;
+
     const errorEl = document.getElementById("submit-error");
     errorEl.style.display = "none";
 
@@ -453,6 +462,8 @@ author_profile: true
       errorEl.classList.remove("shake");
       void errorEl.offsetWidth;
       errorEl.classList.add("shake");
+      isSubmitting = false;
+      submitBtn.disabled = false;
       return;
     }
 
@@ -487,6 +498,8 @@ author_profile: true
       errorEl.classList.remove("shake");
       void errorEl.offsetWidth;
       errorEl.classList.add("shake");
+      isSubmitting = false;
+      submitBtn.disabled = false;
       return;
     }
 
