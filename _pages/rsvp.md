@@ -344,8 +344,10 @@ author_profile: true
     const nameSearchRect = document.getElementById("name-search").getBoundingClientRect();
     const searchBtnRect = document.getElementById("search-btn").getBoundingClientRect();
 
-    spawnImagesWithin(nameSearchRect, 32);
-    spawnImagesWithin(searchBtnRect, 32);
+    setTimeout(() => {
+      spawnImagesWithin(nameSearchRect, 32);
+      spawnImagesWithin(searchBtnRect, 32);
+    }, 10);
 
     setTimeout(() => {
       spawnImagesWithin(nameSearchRect, 32, 1.5);
