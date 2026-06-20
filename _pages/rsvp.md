@@ -178,7 +178,7 @@ author_profile: true
 
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
-  import { getFirestore, collection, getDocs, doc, updateDoc, serverTimestamp, arrayUnion } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
+  import { getFirestore, doc, getDoc, updateDoc, serverTimestamp, arrayUnion } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
 
   const firebaseConfig = {
     apiKey: "AIzaSyDCJHXp8o6-sNXZnBwtIL5YQkwziqIJ5B8",
@@ -191,6 +191,18 @@ author_profile: true
 
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
+
+  function normalizeName(fullName) {
+    const words = fullName.trim().toLowerCase().split(" ").filter(w => w.length > 0);
+    const lastName = words[words.length - 1];
+    const firstPart = words.slice(0, -1).join(" ");
+    return { firstPart, lastName };
+  }
+
+  function searchKey(firstPart, lastName) {
+    const n = Math.min(firstPart.length, 3);
+    return firstPart.slice(0, n) + "|" + lastName;
+  }
 
   let currentGroupDoc = null;
 
@@ -296,8 +308,7 @@ author_profile: true
     if (!query) return;
 
     const queryWords = query.split(" ").filter(w => w.length > 0);
-    const queryLastName = queryWords[queryWords.length - 1];
-    const queryFirstPart = queryWords.slice(0, -1).join(" ");
+    const { firstPart: queryFirstPart, lastName: queryLastName } = normalizeName(query);
 
     if (queryWords.length < 2 || queryFirstPart.length < 2) {
       errorEl.textContent = "Please enter your first and last name (e.g. \"Jeff Cash\").";
@@ -308,19 +319,14 @@ author_profile: true
       return;
     }
 
-    const snapshot = await getDocs(collection(db, "groups"));
-    const match = snapshot.docs.find(d => {
-      const guests = (d.data().guests || []).map(g => g.toLowerCase());
-      const nicknames = (d.data().nicknames || []).map(n => n.toLowerCase());
-      return guests.concat(nicknames).some(guest => {
-        const guestWords = guest.split(" ");
-        const guestLastName = guestWords[guestWords.length - 1];
-        const guestFirstName = guestWords.slice(0, -1).join(" ");
-        const prefixLen = Math.min(queryFirstPart.length, 3);
-        return guestLastName === queryLastName &&
-               guestFirstName.slice(0, prefixLen) === queryFirstPart.slice(0, prefixLen);
-      });
-    });
+    const key = searchKey(queryFirstPart, queryLastName);
+    const lookupSnap = await getDoc(doc(db, "lookups", key));
+
+    let match = null;
+    if (lookupSnap.exists()) {
+      const groupSnap = await getDoc(doc(db, "groups", lookupSnap.data().groupId));
+      if (groupSnap.exists()) match = groupSnap;
+    }
 
     if (!match) {
       errorEl.textContent = "No group found. Try a different name or contact us directly.";
