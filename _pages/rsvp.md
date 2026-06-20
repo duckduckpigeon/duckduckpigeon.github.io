@@ -163,7 +163,7 @@ author_profile: true
     <div class="confirmation-box">
       <h3 style="margin-top:0;">Thanks for your RSVP!</h3>
       <div id="confirmation-message"></div>
-      <p style="margin-bottom:0;">Can't wait to celebrate with you. See you September 5th!</p>
+      <p id="confirmation-closing" style="margin-bottom:0;"></p>
     </div>
   </div>
 </div>
@@ -193,7 +193,8 @@ author_profile: true
   const db = getFirestore(app);
 
   function normalizeName(fullName) {
-    const words = fullName.trim().toLowerCase().split(" ").filter(w => w.length > 0);
+    const cleaned = fullName.trim().toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+    const words = cleaned.split(" ").filter(w => w.length > 0);
     const lastName = words[words.length - 1];
     const firstPart = words.slice(0, -1).join(" ");
     return { firstPart, lastName };
@@ -471,8 +472,9 @@ author_profile: true
     const joinNames = names => names.length < 2 ? names[0] : `${names.slice(0, -1).join(", ")} and ${names[names.length - 1]}`;
 
     let dinnerMsg = "";
+    let dinnerAttending = [];
     if (hasDinner) {
-      const dinnerAttending = data.guests.filter(g => dinnerRsvp[g]);
+      dinnerAttending = data.guests.filter(g => dinnerRsvp[g]);
       const dinnerNotAttending = data.guests.filter(g => !dinnerRsvp[g]);
       if (dinnerAttending.length) dinnerMsg += `For the welcome dinner: ${joinNames(dinnerAttending)} will be attending. `;
       if (dinnerNotAttending.length) dinnerMsg += `${joinNames(dinnerNotAttending)} will not be attending the dinner. `;
@@ -498,6 +500,21 @@ author_profile: true
       p.textContent = text.trim();
       messageEl.appendChild(p);
     });
+
+    const attendingWedding = attending.length > 0;
+    const attendingDinner = dinnerAttending.length > 0;
+    let closingText;
+    if (attendingDinner && attendingWedding) {
+      closingText = "Can't wait to celebrate with you! See you September 4th and 5th!";
+    } else if (attendingDinner) {
+      closingText = "Can't wait to celebrate with you! See you September 4th!";
+    } else if (attendingWedding) {
+      closingText = "Can't wait to celebrate with you! See you September 5th!";
+    } else {
+      closingText = "We're sorry you can't make it — you'll be missed!";
+    }
+    document.getElementById("confirmation-closing").textContent = closingText;
+
     document.getElementById("rsvp-section").style.display = "none";
     document.getElementById("confirmation-section").style.display = "block";
 
