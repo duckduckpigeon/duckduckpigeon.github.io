@@ -113,6 +113,13 @@ author_profile: true
   #submit-btn {
     margin-top: 0.5em;
   }
+  .event-heading {
+    margin: 1.5em 0 0.5em;
+    font-size: 1.1em;
+  }
+  .event-heading:first-child {
+    margin-top: 0;
+  }
   .confirmation-box {
     border: 1px solid #c8e6c9;
     background: #f1f8f1;
@@ -140,6 +147,11 @@ author_profile: true
     </div>
     <p>Please indicate who will be attending:</p>
     <form id="rsvp-form">
+      <div id="dinner-section" style="display:none;">
+        <h4 class="event-heading">Welcome Dinner (Friday)</h4>
+        <div id="dinner-guest-list"></div>
+      </div>
+      <h4 id="wedding-heading" class="event-heading" style="display:none;">Wedding Celebration (Saturday)</h4>
       <div id="guest-list"></div>
       <button type="submit" id="submit-btn" class="rsvp-btn">Submit RSVP</button>
     </form>
@@ -180,6 +192,100 @@ author_profile: true
   const db = getFirestore(app);
 
   let currentGroupDoc = null;
+
+  function renderGuestSection(containerEl, guests, namePrefix, existingRsvp, plusOnes, existingPlusOneNames) {
+    containerEl.innerHTML = "";
+    guests.forEach(guest => {
+      const existing = existingRsvp ? existingRsvp[guest] : undefined;
+      const isPlusOneEligible = (plusOnes || []).includes(guest);
+      const existingPlusOneName = (existingPlusOneNames && existingPlusOneNames[guest]) || "";
+      const radioName = `${namePrefix}-${guest}`;
+
+      const div = document.createElement("div");
+      div.className = "guest-card";
+      div.innerHTML = `
+        <div class="guest-main-row">
+          <strong>${guest}</strong>
+          <div class="guest-radio-group">
+            <label><input type="radio" name="${radioName}" value="yes" ${existing === true ? "checked" : ""}/> Attending</label>
+            <label><input type="radio" name="${radioName}" value="no" ${existing === false ? "checked" : ""}/> Not attending</label>
+          </div>
+        </div>
+        ${isPlusOneEligible ? `
+        <div class="plus-one-row" data-guest="${guest}" style="display:${existing === true ? "flex" : "none"};">
+          <label><input type="checkbox" class="plus-one-checkbox" ${existingPlusOneName ? "checked" : ""}/> Bringing a guest</label>
+          <input type="text" class="plus-one-name" placeholder="Guest's name" value="${existingPlusOneName}" data-edited="${existingPlusOneName ? "true" : "false"}" style="display:${existingPlusOneName ? "inline-block" : "none"};" />
+        </div>` : ""}
+      `;
+      containerEl.appendChild(div);
+
+      if (isPlusOneEligible) {
+        const plusOneRow = div.querySelector(".plus-one-row");
+        const checkbox = div.querySelector(".plus-one-checkbox");
+        const nameInput = div.querySelector(".plus-one-name");
+
+        function resetNameInput() {
+          // Only clear the "edited" flag if the field was already empty —
+          // a name that was typed (or saved from before) stays protected
+          // from being silently overwritten if the box gets rechecked.
+          if (!nameInput.value) {
+            nameInput.dataset.edited = "false";
+          }
+          nameInput.value = "";
+        }
+
+        div.querySelectorAll(`input[name="${radioName}"]`).forEach(radio => {
+          radio.addEventListener("change", () => {
+            plusOneRow.style.display = radio.value === "yes" && radio.checked ? "flex" : plusOneRow.style.display;
+            if (radio.value === "no" && radio.checked) {
+              plusOneRow.style.display = "none";
+              checkbox.checked = false;
+              nameInput.style.display = "none";
+              resetNameInput();
+            }
+          });
+        });
+
+        checkbox.addEventListener("change", () => {
+          nameInput.style.display = checkbox.checked ? "inline-block" : "none";
+          if (!checkbox.checked) resetNameInput();
+        });
+      }
+    });
+  }
+
+  function linkPlusOneInputs(guest) {
+    const weddingRow = document.querySelector(`#guest-list .plus-one-row[data-guest="${guest}"]`);
+    const dinnerRow = document.querySelector(`#dinner-guest-list .plus-one-row[data-guest="${guest}"]`);
+    if (!weddingRow || !dinnerRow) return;
+
+    const weddingInput = weddingRow.querySelector(".plus-one-name");
+    const dinnerInput = dinnerRow.querySelector(".plus-one-name");
+    const weddingCheckbox = weddingRow.querySelector(".plus-one-checkbox");
+    const dinnerCheckbox = dinnerRow.querySelector(".plus-one-checkbox");
+
+    function sync(source, target) {
+      if (target.dataset.edited !== "true") target.value = source.value;
+    }
+
+    weddingInput.addEventListener("input", () => {
+      weddingInput.dataset.edited = "true";
+      sync(weddingInput, dinnerInput);
+    });
+    dinnerInput.addEventListener("input", () => {
+      dinnerInput.dataset.edited = "true";
+      sync(dinnerInput, weddingInput);
+    });
+
+    // A freshly (re)checked box has nothing typed into it yet to trigger the
+    // mirroring above, so pull in the other field's value on check too.
+    weddingCheckbox.addEventListener("change", () => {
+      if (weddingCheckbox.checked) sync(dinnerInput, weddingInput);
+    });
+    dinnerCheckbox.addEventListener("change", () => {
+      if (dinnerCheckbox.checked) sync(weddingInput, dinnerInput);
+    });
+  }
 
   async function doSearch() {
     const query = document.getElementById("name-search").value.trim().toLowerCase();
@@ -230,54 +336,18 @@ author_profile: true
     document.getElementById("group-greeting").textContent = `We found your invitation: ${data.name}`;
     document.getElementById("already-submitted").style.display = data.submitted ? "block" : "none";
 
-    const guestList = document.getElementById("guest-list");
-    guestList.innerHTML = "";
-    (data.guests || []).forEach(guest => {
-      const existing = data.rsvp ? data.rsvp[guest] : undefined;
-      const isPlusOneEligible = (data.plusOnes || []).includes(guest);
-      const existingPlusOneName = (data.plusOneNames && data.plusOneNames[guest]) || "";
+    const hasDinner = !!data.welcomeDinner;
+    document.getElementById("dinner-section").style.display = hasDinner ? "block" : "none";
+    document.getElementById("wedding-heading").style.display = hasDinner ? "block" : "none";
 
-      const div = document.createElement("div");
-      div.className = "guest-card";
-      div.innerHTML = `
-        <div class="guest-main-row">
-          <strong>${guest}</strong>
-          <div class="guest-radio-group">
-            <label><input type="radio" name="${guest}" value="yes" ${existing === true ? "checked" : ""}/> Attending</label>
-            <label><input type="radio" name="${guest}" value="no" ${existing === false ? "checked" : ""}/> Not attending</label>
-          </div>
-        </div>
-        ${isPlusOneEligible ? `
-        <div class="plus-one-row" data-guest="${guest}" style="display:${existing === true ? "flex" : "none"};">
-          <label><input type="checkbox" class="plus-one-checkbox" ${existingPlusOneName ? "checked" : ""}/> Bringing a guest</label>
-          <input type="text" class="plus-one-name" placeholder="Guest's name" value="${existingPlusOneName}" style="display:${existingPlusOneName ? "inline-block" : "none"};" />
-        </div>` : ""}
-      `;
-      guestList.appendChild(div);
+    if (hasDinner) {
+      renderGuestSection(document.getElementById("dinner-guest-list"), data.guests || [], "dinner", data.dinnerRsvp, data.plusOnes, data.dinnerPlusOneNames);
+    }
+    renderGuestSection(document.getElementById("guest-list"), data.guests || [], "wedding", data.rsvp, data.plusOnes, data.plusOneNames);
 
-      if (isPlusOneEligible) {
-        const plusOneRow = div.querySelector(".plus-one-row");
-        const checkbox = div.querySelector(".plus-one-checkbox");
-        const nameInput = div.querySelector(".plus-one-name");
-
-        div.querySelectorAll(`input[name="${guest}"]`).forEach(radio => {
-          radio.addEventListener("change", () => {
-            plusOneRow.style.display = radio.value === "yes" && radio.checked ? "flex" : plusOneRow.style.display;
-            if (radio.value === "no" && radio.checked) {
-              plusOneRow.style.display = "none";
-              checkbox.checked = false;
-              nameInput.style.display = "none";
-              nameInput.value = "";
-            }
-          });
-        });
-
-        checkbox.addEventListener("change", () => {
-          nameInput.style.display = checkbox.checked ? "inline-block" : "none";
-          if (!checkbox.checked) nameInput.value = "";
-        });
-      }
-    });
+    if (hasDinner) {
+      (data.plusOnes || []).forEach(linkPlusOneInputs);
+    }
 
     document.getElementById("search-section").style.display = "none";
     document.getElementById("rsvp-section").style.display = "block";
@@ -294,25 +364,33 @@ author_profile: true
     errorEl.style.display = "none";
 
     const data = currentGroupDoc.data();
-    const rsvp = {};
-    const plusOneNames = {};
-    let allAnswered = true;
+    const hasDinner = !!data.welcomeDinner;
 
-    for (const guest of data.guests) {
-      const selected = document.querySelector(`input[name="${guest}"]:checked`);
-      if (!selected) { allAnswered = false; break; }
-      rsvp[guest] = selected.value === "yes";
+    function collectResponses(containerEl, namePrefix, plusOnes) {
+      const rsvp = {};
+      const plusOneNames = {};
+      for (const guest of data.guests) {
+        const selected = containerEl.querySelector(`input[name="${namePrefix}-${guest}"]:checked`);
+        if (!selected) return null;
+        rsvp[guest] = selected.value === "yes";
 
-      if (rsvp[guest] && (data.plusOnes || []).includes(guest)) {
-        const checkbox = document.querySelector(`.plus-one-row[data-guest="${guest}"] .plus-one-checkbox`);
-        const nameInput = document.querySelector(`.plus-one-row[data-guest="${guest}"] .plus-one-name`);
-        if (checkbox && checkbox.checked && nameInput.value.trim()) {
-          plusOneNames[guest] = nameInput.value.trim();
+        if (rsvp[guest] && (plusOnes || []).includes(guest)) {
+          const checkbox = containerEl.querySelector(`.plus-one-row[data-guest="${guest}"] .plus-one-checkbox`);
+          const nameInput = containerEl.querySelector(`.plus-one-row[data-guest="${guest}"] .plus-one-name`);
+          if (checkbox && checkbox.checked && nameInput.value.trim()) {
+            plusOneNames[guest] = nameInput.value.trim();
+          }
         }
       }
+      return { rsvp, plusOneNames };
     }
 
-    if (!allAnswered) {
+    const weddingResult = collectResponses(document.getElementById("guest-list"), "wedding", data.plusOnes);
+    const dinnerResult = hasDinner
+      ? collectResponses(document.getElementById("dinner-guest-list"), "dinner", data.plusOnes)
+      : { rsvp: {}, plusOneNames: {} };
+
+    if (!weddingResult || !dinnerResult) {
       errorEl.textContent = "Please select attending or not attending for each person.";
       errorEl.style.display = "block";
       errorEl.classList.remove("shake");
@@ -321,22 +399,56 @@ author_profile: true
       return;
     }
 
-    await updateDoc(doc(db, "groups", currentGroupDoc.id), {
+    const { rsvp, plusOneNames } = weddingResult;
+    const dinnerRsvp = dinnerResult.rsvp;
+    const dinnerPlusOneNames = dinnerResult.plusOneNames;
+
+    const updatePayload = {
       rsvp,
       plusOneNames,
       submitted: true,
-      submittedAt: serverTimestamp(),
-      history: arrayUnion({ rsvp, plusOneNames, submittedAt: new Date() })
-    });
+      submittedAt: serverTimestamp()
+    };
+    const historyEntry = { rsvp, plusOneNames, submittedAt: new Date() };
+    if (hasDinner) {
+      updatePayload.dinnerRsvp = dinnerRsvp;
+      updatePayload.dinnerPlusOneNames = dinnerPlusOneNames;
+      historyEntry.dinnerRsvp = dinnerRsvp;
+      historyEntry.dinnerPlusOneNames = dinnerPlusOneNames;
+    }
+    updatePayload.history = arrayUnion(historyEntry);
+
+    try {
+      await updateDoc(doc(db, "groups", currentGroupDoc.id), updatePayload);
+    } catch (err) {
+      console.error("RSVP submit failed:", err);
+      errorEl.textContent = "Something went wrong submitting your RSVP. Please try again or contact us directly.";
+      errorEl.style.display = "block";
+      errorEl.classList.remove("shake");
+      void errorEl.offsetWidth;
+      errorEl.classList.add("shake");
+      return;
+    }
+
+    const joinNames = names => names.length < 2 ? names[0] : `${names.slice(0, -1).join(", ")} and ${names[names.length - 1]}`;
+    let msg = "";
+
+    if (hasDinner) {
+      const dinnerAttending = data.guests.filter(g => dinnerRsvp[g]);
+      const dinnerNotAttending = data.guests.filter(g => !dinnerRsvp[g]);
+      if (dinnerAttending.length) msg += `For the welcome dinner: ${joinNames(dinnerAttending)} will be attending. `;
+      if (dinnerNotAttending.length) msg += `${joinNames(dinnerNotAttending)} will not be attending the dinner. `;
+      for (const [guest, plusOneName] of Object.entries(dinnerPlusOneNames)) {
+        msg += `${guest} is bringing ${plusOneName} to the dinner. `;
+      }
+    }
 
     const attending = data.guests.filter(g => rsvp[g]);
     const notAttending = data.guests.filter(g => !rsvp[g]);
-    let msg = "";
-    const joinNames = names => names.length < 2 ? names[0] : `${names.slice(0, -1).join(", ")} and ${names[names.length - 1]}`;
-    if (attending.length) msg += `${joinNames(attending)} will be attending. `;
+    if (attending.length) msg += `For the wedding: ${joinNames(attending)} will be attending. `;
     if (notAttending.length) msg += `${joinNames(notAttending)} will not be attending. `;
     for (const [guest, plusOneName] of Object.entries(plusOneNames)) {
-      msg += `${guest} is bringing ${plusOneName}. `;
+      msg += `${guest} is bringing ${plusOneName} to the wedding. `;
     }
 
     document.getElementById("confirmation-message").textContent = msg;
