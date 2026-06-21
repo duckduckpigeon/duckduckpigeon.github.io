@@ -6,11 +6,6 @@ author_profile: true
 ---
 
 <style>
-  .rsvp-notice {
-    font-style: italic;
-    color: #7a8288;
-    margin-bottom: 1.5em;
-  }
   .rsvp-search-row {
     display: flex;
     gap: 0.5em;
@@ -135,10 +130,9 @@ author_profile: true
   }
 </style>
 
-<p class="rsvp-notice">Our RSVP portal is coming soon — check back later!</p>
-
 <div id="rsvp-app">
   <div id="search-section">
+    <p>Please RSVP by <strong>August 5th</strong>.</p>
     <p>Search for your name to find your invitation.</p>
     <div class="rsvp-search-row">
       <input type="text" id="name-search" placeholder="e.g. Jeff Cash" autocomplete="off" />
@@ -156,6 +150,7 @@ author_profile: true
     <form id="rsvp-form">
       <div id="dinner-section" style="display:none;">
         <h4 class="event-heading">Welcome Dinner (Friday, 5:30–7:00pm)</h4>
+        <p style="margin-top:-0.5em; color:#7a8288; font-size:0.9em;">If you can see this option, you're either close family or in the bridal party!</p>
         <div id="dinner-guest-list"></div>
       </div>
       <h4 class="event-heading">Cocktail Hour (Friday, 7:00pm)</h4>
