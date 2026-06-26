@@ -468,3 +468,87 @@ a.reversefootnote {
   color: $danger-color;
   font-weight: bold;
 }
+
+
+/*
+   Auto-scrolling marquee gallery
+   ========================================================================== */
+
+figure.scroll-gallery {
+  display: block;
+  overflow: hidden;
+  width: 100%;
+  margin-left: 0;
+  margin-right: 0;
+  padding: 0;
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0,
+    #000 2.5rem,
+    #000 calc(100% - 2.5rem),
+    transparent 100%
+  );
+          mask-image: linear-gradient(
+    to right,
+    transparent 0,
+    #000 2.5rem,
+    #000 calc(100% - 2.5rem),
+    transparent 100%
+  );
+
+  .scroll-track {
+    display: flex;
+    width: max-content;
+    animation: scroll-gallery var(--scroll-duration, 40s) linear infinite;
+  }
+
+  &:hover .scroll-track,
+  &:focus-within .scroll-track {
+    animation-play-state: paused;
+  }
+
+  .scroll-group {
+    display: flex;
+    flex-shrink: 0;
+    flex-wrap: nowrap;
+    align-items: center;
+    min-width: 100%;
+    gap: 0.5rem;
+    padding-right: 0.5rem;
+  }
+
+  .scroll-group > a,
+  .scroll-group > img {
+    flex-shrink: 0;
+    display: block;
+    width: auto;
+    height: 220px;
+  }
+
+  .scroll-group > a > img {
+    display: block;
+    width: auto;
+    height: 220px;
+  }
+}
+
+@keyframes scroll-gallery {
+  from { transform: translate3d(0, 0, 0); }
+  to   { transform: translate3d(-50%, 0, 0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  figure.scroll-gallery {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    -webkit-mask-image: none;
+            mask-image: none;
+  }
+  figure.scroll-gallery .scroll-track {
+    animation: none;
+    width: auto;
+  }
+  figure.scroll-gallery .scroll-group[aria-hidden="true"] {
+    display: none;
+  }
+}
