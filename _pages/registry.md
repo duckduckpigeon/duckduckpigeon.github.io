@@ -23,8 +23,8 @@ gallery_saturday:
   - image_path: dress_2.jpg
     url: dress_2.jpg
     alt: "Dress inspiration"
-  - image_path: dress_3.PNG
-    url: dress_3.PNG
+  - image_path: dress_3.jpg
+    url: dress_3.jpg
     alt: "Dress inspiration"
   - image_path: dress_4.jpg
     url: dress_4.jpg
@@ -32,8 +32,8 @@ gallery_saturday:
   - image_path: dress_5.jpg
     url: dress_5.jpg
     alt: "Dress inspiration"
-  - image_path: dress_6.PNG
-    url: dress_6.PNG
+  - image_path: dress_6.jpg
+    url: dress_6.jpg
     alt: "Dress inspiration"
   - image_path: dress_7.jpg
     url: dress_7.jpg
