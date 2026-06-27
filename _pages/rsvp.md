@@ -153,7 +153,7 @@ author_profile: true
         <p style="margin-top:-0.5em; color:#7a8288; font-size:0.9em;">If you can see this option, you're either close family or in the bridal party!</p>
         <div id="dinner-guest-list"></div>
       </div>
-      <h4 class="event-heading">Cocktail Hour (Friday, 7:00pm)</h4>
+      <h4 class="event-heading">Brewery Gathering (Friday, 7:00pm)</h4>
       <div id="cocktail-guest-list"></div>
       <h4 class="event-heading">Wedding Celebration (Saturday)</h4>
       <div id="guest-list"></div>
