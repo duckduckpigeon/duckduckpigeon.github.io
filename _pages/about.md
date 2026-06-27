@@ -13,9 +13,7 @@ redirect_from:
 
 Join us for a Labor Day 2026 wedding weekend in San Diego!
 
-<video width="320" height="240" controls>
-  <source src="../images/gettingMarried.mov" type="video/mp4">
-</video>
+<iframe src="https://youtu.be/UXg6k7pyoUE" width="100%" height="500px" style="border:none;"></iframe>
 
 
 <img src="../images/Mission Bay Arial.jpg" alt="Map of ocean, home, where venue is" width="500">
