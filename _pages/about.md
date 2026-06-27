@@ -14,7 +14,7 @@ redirect_from:
 Join us for a Labor Day 2026 wedding weekend in San Diego!
 
 <video width="320" height="240" controls>
-  <source src="images/gettingMarried.mov" type="video/mp4">
+  <source src="../images/gettingMarried.mov" type="video/mp4">
 </video>
 
 
