@@ -23,7 +23,7 @@ A beachfront resort with lush tropical grounds, a restaurant and bar, and a full
 
 
 
-[Reserve Your Room at the Catamaran here.](https://www.catamaranresort.com/groupcode?code=CKLwed)
+[Reserve Your Room at the Catamaran HERE.](https://www.catamaranresort.com/groupcode?code=CKLwed)
 
 (800) 422-8386 
 
@@ -45,7 +45,7 @@ A more budget-friendly option that features a relaxed waterfront setting with po
 
 
 
-[Reserve Your Room at The Dana here.](https://res.windsurfercrs.com/ibe/details.aspx?propertyid=17116&nights=2&checkin=09/04/2026&group=2609ZJBCE&lang=en-us&adults=2)
+[Reserve Your Room at The Dana HERE.](https://res.windsurfercrs.com/ibe/details.aspx?propertyid=17116&nights=2&checkin=09/04/2026&group=2609ZJBCE&lang=en-us&adults=2)
 
 (800) 445-3339
 
