@@ -11,7 +11,11 @@ redirect_from:
 <!-- <div style="background-image: url('../images/shirt.jpg'); background-size: cover; padding: 20px;"></div> -->
 
 
-Join us for a Labor Day wedding weekend in San Diego!
+Join us for a Labor Day 2026 wedding weekend in San Diego!
+
+<video width="320" height="240" controls>
+  <source src="images/gettingMarried.mov" type="video/mp4">
+</video>
 
 
 <img src="../images/Mission Bay Arial.jpg" alt="Map of ocean, home, where venue is" width="500">
