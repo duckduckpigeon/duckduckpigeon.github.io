@@ -102,11 +102,32 @@ Join us for a Labor Day 2026 wedding weekend in San Diego!
       img.addEventListener('animationend', function () { img.remove(); });
     }
 
-    var spawnTimer = setInterval(spawnFlyer, 400);
+    var rampStart = Date.now();
+    var baseInterval = 400;
+    var maxMultiplier = 5;
+    var rampDelayMs = 10000;
+    var rampDurationMs = 60000;
+
+    function currentInterval() {
+      var elapsed = Date.now() - rampStart;
+      var rampElapsed = Math.max(elapsed - rampDelayMs, 0);
+      var progress = Math.min(rampElapsed / rampDurationMs, 1);
+      var multiplier = 1 + (maxMultiplier - 1) * progress;
+      return baseInterval / multiplier;
+    }
+
+    var spawnTimer;
+    function scheduleNext() {
+      spawnTimer = setTimeout(function () {
+        spawnFlyer();
+        scheduleNext();
+      }, currentInterval());
+    }
+    scheduleNext();
 
     document.addEventListener('visibilitychange', function () {
-      clearInterval(spawnTimer);
-      if (!document.hidden) spawnTimer = setInterval(spawnFlyer, 400);
+      clearTimeout(spawnTimer);
+      if (!document.hidden) scheduleNext();
     });
   })();
 </script>
