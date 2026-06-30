@@ -18,7 +18,7 @@ Join us for a Labor Day 2026 wedding weekend in San Diego!
   Your browser does not support the video tag.
 </video>
 
-<p><a href="/rsvp/" style="display:inline-block; padding:0.6em 1.5em; background:#418aa0; color:#fff; font-weight:bold; font-size:1.1em; border-radius:4px; text-decoration:none;">RSVP Here!</a></p>
+<a href="/rsvp/" style="display:block; width:100%; box-sizing:border-box; padding:0.6em 1.5em; background:#418aa0; color:#fff; font-weight:bold; font-size:1.1em; border-radius:4px; text-decoration:none; text-align:center;">RSVP Here!</a>
 
 <img src="../images/Mission Bay Arial.jpg" alt="Map of ocean, home, where venue is" width="500">
 <!-- <a href="#about-overview">Overview of the Weekend</a> – <a href="#about-friday">Friday</a> –  <a href="#about-weddingday">Wedding Day</a>
