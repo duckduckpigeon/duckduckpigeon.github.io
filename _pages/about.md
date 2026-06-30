@@ -18,7 +18,81 @@ Join us for a Labor Day 2026 wedding weekend in San Diego!
   Your browser does not support the video tag.
 </video>
 
-<a href="/rsvp/" style="display:block; width:100%; box-sizing:border-box; padding:0.6em 1.5em; background:#418aa0; color:#fff; font-weight:bold; font-size:1.1em; border-radius:4px; text-decoration:none; text-align:center;">RSVP Here!</a>
+<div class="rsvp-cta-wrap">
+  <a href="/rsvp/" class="rsvp-cta-btn">RSVP Here!</a>
+</div>
+
+<style>
+  .rsvp-cta-wrap {
+    position: relative;
+    overflow: hidden;
+    border-radius: 4px;
+    background: #418aa0;
+    transform: translateZ(0);
+    margin-bottom: 1em;
+  }
+  .rsvp-cta-btn {
+    position: relative;
+    z-index: 2;
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0.6em 1.5em;
+    background: transparent;
+    color: #fff;
+    font-weight: bold;
+    font-size: 1.1em;
+    border-radius: 4px;
+    text-decoration: none;
+    text-align: center;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.6);
+  }
+  .rsvp-fly-img {
+    position: absolute;
+    z-index: 1;
+    top: var(--start-y);
+    width: var(--fly-size);
+    animation: rsvp-fly-ltr var(--fly-duration) linear forwards;
+    pointer-events: none;
+  }
+  .rsvp-fly-img.rtl { animation-name: rsvp-fly-rtl; }
+  @keyframes rsvp-fly-ltr {
+    from { left: -15%; transform: translateY(-50%) scaleX(1); }
+    to   { left: 110%; transform: translateY(-50%) scaleX(1); }
+  }
+  @keyframes rsvp-fly-rtl {
+    from { left: 110%; transform: translateY(-50%) scaleX(-1); }
+    to   { left: -15%; transform: translateY(-50%) scaleX(-1); }
+  }
+</style>
+
+<script>
+  /* Ambient flying-pigeon effect for the RSVP button.
+     Block comments only -- Jekyll's compressor swallows // line comments in production. */
+  (function () {
+    var wrap = document.querySelector('.rsvp-cta-wrap');
+    if (!wrap) return;
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    function spawnFlyer() {
+      var img = document.createElement('img');
+      img.src = '/images/popin/pidge' + parseInt(Math.random() * 14) + '.png';
+      img.className = 'rsvp-fly-img' + (Math.random() < 0.5 ? ' rtl' : '');
+      img.style.setProperty('--start-y', (15 + Math.random() * 70) + '%');
+      img.style.setProperty('--fly-size', (28 + Math.random() * 14) + 'px');
+      img.style.setProperty('--fly-duration', (3 + Math.random() * 1.5) + 's');
+      wrap.appendChild(img);
+      img.addEventListener('animationend', function () { img.remove(); });
+    }
+
+    var spawnTimer = setInterval(spawnFlyer, 400);
+
+    document.addEventListener('visibilitychange', function () {
+      clearInterval(spawnTimer);
+      if (!document.hidden) spawnTimer = setInterval(spawnFlyer, 400);
+    });
+  })();
+</script>
 
 <img src="../images/Mission Bay Arial.jpg" alt="Map of ocean, home, where venue is" width="500">
 <!-- <a href="#about-overview">Overview of the Weekend</a> – <a href="#about-friday">Friday</a> –  <a href="#about-weddingday">Wedding Day</a>
