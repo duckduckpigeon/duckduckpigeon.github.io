@@ -37,7 +37,7 @@ Join us for a Labor Day 2026 wedding weekend in San Diego!
     display: block;
     width: 100%;
     box-sizing: border-box;
-    padding: 0.9em 1.5em;
+    padding: 1.125em 1.5em;
     background: transparent;
     color: #fff;
     font-weight: bold;
