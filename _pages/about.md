@@ -50,19 +50,16 @@ Join us for a Labor Day 2026 wedding weekend in San Diego!
   .rsvp-fly-img {
     position: absolute;
     z-index: 1;
+    left: var(--start-x);
     top: var(--start-y);
     width: var(--fly-size);
-    animation: rsvp-fly-ltr var(--fly-duration) linear forwards;
+    transform: translate(-50%, -50%) rotate(0deg);
+    animation: rsvp-fly var(--fly-duration) linear forwards;
     pointer-events: none;
   }
-  .rsvp-fly-img.rtl { animation-name: rsvp-fly-rtl; }
-  @keyframes rsvp-fly-ltr {
-    from { left: -15%; transform: translateY(-50%) scaleX(1); }
-    to   { left: 110%; transform: translateY(-50%) scaleX(1); }
-  }
-  @keyframes rsvp-fly-rtl {
-    from { left: 110%; transform: translateY(-50%) scaleX(-1); }
-    to   { left: -15%; transform: translateY(-50%) scaleX(-1); }
+  @keyframes rsvp-fly {
+    from { left: var(--start-x); top: var(--start-y); transform: translate(-50%, -50%) rotate(0deg); }
+    to   { left: var(--end-x);   top: var(--end-y);   transform: translate(-50%, -50%) rotate(var(--spin)); }
   }
 </style>
 
@@ -74,11 +71,31 @@ Join us for a Labor Day 2026 wedding weekend in San Diego!
     if (!wrap) return;
     if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
+    function randomPerimeterPoint() {
+      var side = Math.floor(Math.random() * 4);
+      var t = Math.random() * 140 - 20; /* -20 to 120 */
+      if (side === 0) return { x: t, y: -20 };
+      if (side === 1) return { x: 120, y: t };
+      if (side === 2) return { x: t, y: 120 };
+      return { x: -20, y: t };
+    }
+
     function spawnFlyer() {
       var img = document.createElement('img');
       img.src = '/images/popin/pidge' + parseInt(Math.random() * 14) + '.png';
-      img.className = 'rsvp-fly-img' + (Math.random() < 0.5 ? ' rtl' : '');
-      img.style.setProperty('--start-y', (15 + Math.random() * 70) + '%');
+      img.className = 'rsvp-fly-img';
+
+      var start = randomPerimeterPoint();
+      var end = { x: 100 - start.x, y: 100 - start.y };
+      img.style.setProperty('--start-x', start.x + '%');
+      img.style.setProperty('--start-y', start.y + '%');
+      img.style.setProperty('--end-x', end.x + '%');
+      img.style.setProperty('--end-y', end.y + '%');
+
+      var spinMag = 90 + Math.random() * 270;
+      var spin = (Math.random() < 0.5 ? -1 : 1) * spinMag;
+      img.style.setProperty('--spin', spin + 'deg');
+
       img.style.setProperty('--fly-size', (28 + Math.random() * 14) + 'px');
       img.style.setProperty('--fly-duration', (3 + Math.random() * 1.5) + 's');
       wrap.appendChild(img);
