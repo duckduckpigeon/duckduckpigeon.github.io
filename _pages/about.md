@@ -71,13 +71,14 @@ Join us for a Labor Day 2026 wedding weekend in San Diego!
     if (!wrap) return;
     if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-    function randomPerimeterPoint() {
+    function randomPerimeterPoint(marginXPct, marginYPct) {
       var side = Math.floor(Math.random() * 4);
-      var t = Math.random() * 140 - 20; /* -20 to 120 */
-      if (side === 0) return { x: t, y: -20 };
-      if (side === 1) return { x: 120, y: t };
-      if (side === 2) return { x: t, y: 120 };
-      return { x: -20, y: t };
+      var tx = Math.random() * (100 + 2 * marginXPct) - marginXPct;
+      var ty = Math.random() * (100 + 2 * marginYPct) - marginYPct;
+      if (side === 0) return { x: tx, y: -marginYPct };
+      if (side === 1) return { x: 100 + marginXPct, y: ty };
+      if (side === 2) return { x: tx, y: 100 + marginYPct };
+      return { x: -marginXPct, y: ty };
     }
 
     function spawnFlyer() {
@@ -85,7 +86,15 @@ Join us for a Labor Day 2026 wedding weekend in San Diego!
       img.src = '/images/popin/pidge' + parseInt(Math.random() * 14) + '.png';
       img.className = 'rsvp-fly-img';
 
-      var start = randomPerimeterPoint();
+      var flySize = 28 + Math.random() * 14; /* px */
+      var rect = wrap.getBoundingClientRect();
+      /* Margin covers half the sprite plus its worst-case rotated bounding box, so it's
+         always fully hidden by overflow:hidden before it "pops in" -- percentage margins
+         alone don't work here since the button is much shorter than it is wide. */
+      var marginXPct = (flySize / rect.width) * 100;
+      var marginYPct = (flySize / rect.height) * 100;
+
+      var start = randomPerimeterPoint(marginXPct, marginYPct);
       var end = { x: 100 - start.x, y: 100 - start.y };
       img.style.setProperty('--start-x', start.x + '%');
       img.style.setProperty('--start-y', start.y + '%');
@@ -96,7 +105,7 @@ Join us for a Labor Day 2026 wedding weekend in San Diego!
       var spin = (Math.random() < 0.5 ? -1 : 1) * spinMag;
       img.style.setProperty('--spin', spin + 'deg');
 
-      img.style.setProperty('--fly-size', (28 + Math.random() * 14) + 'px');
+      img.style.setProperty('--fly-size', flySize + 'px');
       img.style.setProperty('--fly-duration', (3 + Math.random() * 1.5) + 's');
       wrap.appendChild(img);
       img.addEventListener('animationend', function () { img.remove(); });
