@@ -80,6 +80,13 @@ gallery_saturday:
   - image_path: dress_22.jpg
     url: dress_22.jpg
     alt: "Dress inspiration"
+gallery_saturday_men:
+  - image_path: bridesmaid_dress.jpg
+    url: bridesmaid_dress.jpg
+    alt: "Dress inspiration"
+  - image_path: dress_1.jpg
+    url: dress_1.jpg
+    alt: "Dress inspiration"
 ---
 
 
@@ -99,3 +106,6 @@ Think: Hawaiian shirts, bold prints, and fun, colorful vibes. The wedding party 
 Groovy and colorful! The wedding party will be leaning into the theme. See below bridesmaids’ dresses for inspiration. Groomsmen inspiration coming soon! Think colorful suits and shirts. The more color the better!
 
 {% include gallery id="gallery_saturday" class="scroll-gallery" %}
+
+{% include gallery id="gallery_saturday_men" class="scroll-gallery" %}
+
