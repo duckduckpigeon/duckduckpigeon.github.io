@@ -80,6 +80,31 @@ gallery_saturday:
   - image_path: dress_22.jpg
     url: dress_22.jpg
     alt: "Dress inspiration"
+gallery_saturday_men:
+  - image_path: suit_1.jpg
+    url: suit_1.jpg
+    alt: "Suit inspiration"
+  - image_path: suit_2.jpg
+    url: suit_2.jpg
+    alt: "Suit inspiration"
+  - image_path: suit_3.jpg
+    url: suit_3.jpg
+    alt: "Suit inspiration"
+  - image_path: suit_4.jpg
+    url: suit_4.jpg
+    alt: "Suit inspiration"
+  - image_path: suit_5.jpg
+    url: suit_5.jpg
+    alt: "Suit inspiration"
+  - image_path: suit_6.jpg
+    url: suit_6.jpg
+    alt: "Suit inspiration"
+  - image_path: suit_7.jpg
+    url: suit_7.jpg
+    alt: "Suit inspiration"
+  - image_path: suit_8.jpg
+    url: suit_8.jpg
+    alt: "Suit inspiration"
 ---
 
 <details open>
@@ -90,6 +115,7 @@ gallery_saturday:
 
   <p><b>Wedding Day:</b> Groovy/disco and colorful! Bring the vibes.</p>
   {% include gallery id="gallery_saturday" class="scroll-gallery" %}
+  {% include gallery id="gallery_saturday_men" class="scroll-gallery" %}
 
 </details>
 <br>
