@@ -81,12 +81,30 @@ gallery_saturday:
     url: dress_22.jpg
     alt: "Dress inspiration"
 gallery_saturday_men:
-  - image_path: bridesmaid_dress.jpg
-    url: bridesmaid_dress.jpg
-    alt: "Dress inspiration"
-  - image_path: dress_1.jpg
-    url: dress_1.jpg
-    alt: "Dress inspiration"
+  - image_path: suit_1.jpg
+    url: suit_1.jpg
+    alt: "Suit inspiration"
+  - image_path: suit_2.jpg
+    url: suit_2.jpg
+    alt: "Suit inspiration"
+  - image_path: suit_3.jpg
+    url: suit_3.jpg
+    alt: "Suit inspiration"
+  - image_path: suit_4.jpg
+    url: suit_4.jpg
+    alt: "Suit inspiration"
+  - image_path: suit_5.jpg
+    url: suit_5.jpg
+    alt: "Suit inspiration"
+  - image_path: suit_6.jpg
+    url: suit_6.jpg
+    alt: "Suit inspiration"
+  - image_path: suit_7.jpg
+    url: suit_7.jpg
+    alt: "Suit inspiration"
+  - image_path: suit_8.jpg
+    url: suit_8.jpg
+    alt: "Suit inspiration"
 ---
 
 
@@ -103,7 +121,7 @@ Think: Hawaiian shirts, bold prints, and fun, colorful vibes. The wedding party 
 
 ## Saturday Wedding Attire
 
-Groovy and colorful! The wedding party will be leaning into the theme. See below bridesmaids’ dresses for inspiration. Groomsmen inspiration coming soon! Think colorful suits and shirts. The more color the better!
+Groovy and colorful! The wedding party will be leaning into the theme. See below for inspiration. Think colorful dresses, pant suits, suits and shirts (preferences for no black, dark grey, etc.). The more color the better!
 
 {% include gallery id="gallery_saturday" class="scroll-gallery" %}
 
