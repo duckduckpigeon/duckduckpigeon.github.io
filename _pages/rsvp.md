@@ -132,7 +132,6 @@ author_profile: true
 
 <div id="rsvp-app">
   <div id="search-section">
-    <p>Please RSVP by <strong>August 5th</strong>.</p>
     <p>Search for your name to find your invitation.</p>
     <div class="rsvp-search-row">
       <input type="text" id="name-search" placeholder="e.g. Jeff Cash" autocomplete="off" />
