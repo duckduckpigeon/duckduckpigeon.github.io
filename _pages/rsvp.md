@@ -69,6 +69,20 @@ author_profile: true
   .guest-card strong {
     font-size: 1.05em;
   }
+  .guest-name-wrap {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+  }
+  .plus-one-badge {
+    background: #418aa0;
+    color: #fff;
+    font-size: 0.75em;
+    font-weight: 600;
+    padding: 0.15em 0.5em;
+    border-radius: 10px;
+    white-space: nowrap;
+  }
   .guest-radio-group {
     display: flex;
     gap: 1.25em;
@@ -222,7 +236,7 @@ author_profile: true
       div.className = "guest-card";
       div.innerHTML = `
         <div class="guest-main-row">
-          <strong>${guest}</strong>
+          <span class="guest-name-wrap"><strong>${guest}</strong>${isPlusOneEligible ? `<span class="plus-one-badge">+1</span>` : ""}</span>
           <div class="guest-radio-group">
             <label><input type="radio" name="${radioName}" value="yes" ${existing === true ? "checked" : ""}/> Attending</label>
             <label><input type="radio" name="${radioName}" value="no" ${existing === false ? "checked" : ""}/> Not attending</label>
